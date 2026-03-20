@@ -692,104 +692,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ── LOAD PHOTOGRAPHY (Flickr public feed via JSONP) ─────── */
-function flickrJsonp(flickrId) {
-  return new Promise((resolve, reject) => {
-    const cbName = '_flickrCb' + Date.now();
-    const script = document.createElement('script');
-    script.src = `https://api.flickr.com/services/feeds/photos_public.gne?id=${flickrId}&format=json&jsoncallback=${cbName}`;
-
-    window[cbName] = (data) => {
-      resolve(data);
-      delete window[cbName];
-      script.remove();
-    };
-    script.onerror = () => {
-      reject(new Error('Flickr JSONP failed'));
-      delete window[cbName];
-      script.remove();
-    };
-
-    document.head.appendChild(script);
-
-    // Timeout after 8 seconds
-    setTimeout(() => {
-      if (window[cbName]) {
-        reject(new Error('Flickr timeout'));
-        delete window[cbName];
-        script.remove();
-      }
-    }, 8000);
-  });
-}
-
-async function loadPhotography() {
-  const strip = $('#photo-strip');
-  if (!strip) return;
-
-  // Read Flickr ID from profile.json (or use default)
-  let flickrId = '191338552@N04';
-  try {
-    const profile = await fetch('data/profile.json').then(r => r.json());
-    if (profile.flickrId) flickrId = profile.flickrId;
-  } catch (e) { /* use default */ }
-
-  try {
-    const data = await flickrJsonp(flickrId);
-    const photos = (data.items || []).slice(0, 12);
-
-    if (photos.length === 0) {
-      strip.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">No photos found.</p>';
-      return;
-    }
-
-    strip.innerHTML = photos.map(photo => {
-      // Flickr feed gives media.m as _m size (240px). Upgrade to _c (800px) for better quality
-      const imgSrc = (photo.media && photo.media.m) ? photo.media.m.replace('_m.', '_c.') : '';
-      const title  = photo.title || 'Untitled';
-      const link   = photo.link || '#';
-      return `<a href="${link}" target="_blank" rel="noopener noreferrer" class="photo-card" title="${title}">
-                <img src="${imgSrc}" alt="${title}" loading="lazy" />
-                <div class="photo-overlay">
-                  <span class="photo-title">${title}</span>
-                </div>
-              </a>`;
-    }).join('');
-
-    initPhotoCarousel();
-  } catch (e) {
-    strip.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">Could not load photos from Flickr.</p>';
-  }
-}
-
-function initPhotoCarousel() {
-  const strip = $('#photo-strip');
-  const prev  = $('#photo-prev');
-  const next  = $('#photo-next');
-  if (!strip || !prev || !next) return;
-
-  const scrollAmount = () => {
-    const card = strip.querySelector('.photo-card');
-    return card ? card.offsetWidth + 14 : 280;
-  };
-
-  const updateButtons = () => {
-    prev.disabled = strip.scrollLeft <= 2;
-    next.disabled = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2;
-  };
-
-  prev.addEventListener('click', () => {
-    strip.scrollBy({ left: -scrollAmount() * 2, behavior: 'smooth' });
-  });
-  next.addEventListener('click', () => {
-    strip.scrollBy({ left: scrollAmount() * 2, behavior: 'smooth' });
-  });
-
-  strip.addEventListener('scroll', updateButtons, { passive: true });
-  updateButtons();
-  requestAnimationFrame(updateButtons);
-}
-
 /* ── BOOT ─────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
   initTheme();
@@ -806,7 +708,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadResume(),
     loadProjects(),
     loadBlog(),
-    loadPhotography(),
   ]);
 
   initReveal();

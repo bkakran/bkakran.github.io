@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-palette="ember">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Beyond Code — Bhargava Kakrannaya</title>
+  <meta name="description" content="Photography, bookshelf, and personal interests of Bhargava Kakrannaya. Explore what happens when the IDE closes." />
+  <meta name="theme-color" content="#fafafa" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3DWN6P5YCZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-3DWN6P5YCZ');
+  </script>
+</head>
+<body>
+
+  <!-- ───────────── NAVBAR ───────────── -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>
+        <span>Bhargava</span>
+        <span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/"               class="nav-link">Home</a></li>
+        <li><a href="/#about"         class="nav-link">About</a></li>
+        <li><a href="/#resume"        class="nav-link">Resume</a></li>
+        <li><a href="/#blog"          class="nav-link">Blog</a></li>
+        <li><a href="beyond-code.html" class="nav-link active">Beyond Code</a></li>
+        <li><a href="/#contact"       class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ───────────── PAGE HEADER ───────────── -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="section-tag">When the IDE closes</span>
+      <h1 class="page-hero-title">Beyond Code</h1>
+      <p class="page-hero-subtitle">Photography, books, and the things that fuel creativity when I'm not building systems.</p>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 1 — PHOTOGRAPHY
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="section" id="photography">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Through my lens</span>
+        <h2 class="section-title">Photography</h2>
+        <p class="section-subtitle">Chasing light and capturing moments from travels and everyday life.</p>
+        <p class="page-hero-count" id="photo-count"></p>
+        <a href="https://www.flickr.com/photos/191338552@N04/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="margin-top:12px;">
+          <i class="fab fa-flickr"></i> View full gallery on Flickr
+        </a>
+      </div>
+
+      <div class="photo-gallery" id="photo-gallery">
+        <div class="photo-gallery-loading">
+          <i class="fas fa-spinner fa-spin"></i> Loading photos from Flickr...
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Section divider ── -->
+  <div class="bc-section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SECTION 2 — BOOKSHELF
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="section" id="bookshelf">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What I read</span>
+        <h2 class="section-title">Bookshelf</h2>
+        <p class="section-subtitle">A curated collection of books I've read and those on my reading list.</p>
+        <a href="https://www.goodreads.com/user/show/89441953-bhargava-pejakala" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="margin-top:12px;">
+          <i class="fab fa-goodreads"></i> View on Goodreads
+        </a>
+      </div>
+
+      <!-- Shelf tabs -->
+      <div class="shelf-tabs" id="shelf-tabs">
+        <button class="shelf-tab-btn active" data-shelf="read">
+          <i class="fas fa-book"></i> Read <span class="tab-count" id="count-read">—</span>
+        </button>
+        <button class="shelf-tab-btn" data-shelf="currently-reading">
+          <i class="fas fa-book-reader"></i> Reading <span class="tab-count" id="count-currently-reading">—</span>
+        </button>
+        <button class="shelf-tab-btn" data-shelf="to-read">
+          <i class="fas fa-bookmark"></i> To Read <span class="tab-count" id="count-to-read">—</span>
+        </button>
+      </div>
+
+      <!-- Shelf contents -->
+      <div class="shelf-content active" id="shelf-read">
+        <div class="books-grid" id="books-read">
+          <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
+        </div>
+      </div>
+      <div class="shelf-content" id="shelf-currently-reading">
+        <div class="books-grid" id="books-currently-reading">
+          <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
+        </div>
+      </div>
+      <div class="shelf-content" id="shelf-to-read">
+        <div class="books-grid" id="books-to-read">
+          <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────── FOOTER ───────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none; padding-top:0;">
+        <p>&copy; <span id="year-now"></span> Bhargava Kakrannaya</p>
+        <p><a href="/">← Back to portfolio</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ───────────── LIGHTBOX ───────────── -->
+  <div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close"><i class="fas fa-times"></i></button>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="lightbox-nav lightbox-next" id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" alt="" />
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+    </div>
+  </div>
+
+  <button class="back-to-top" id="back-to-top" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    document.getElementById('year-now').textContent = new Date().getFullYear();
+
+    // ── Hamburger menu ──
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    }));
+
+    // ── Back to top ──
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+
+    /* ═══════════════════════════════════════════════════════════
+       PHOTOGRAPHY — Flickr REST API via JSONP (all photos)
+       ═══════════════════════════════════════════════════════════ */
+
+    const FLICKR_USER_ID = '191338552@N04';
+    const FLICKR_API_KEY = '4bde03e498e5e4e992042dd498285b04';
+
+    function flickrApiJsonp(params) {
+      return new Promise((resolve, reject) => {
+        const cbName = '_flickrApi' + Date.now() + Math.random().toString(36).slice(2);
+        const qs = new URLSearchParams({
+          ...params,
+          api_key: FLICKR_API_KEY,
+          format: 'json',
+          jsoncallback: cbName
+        });
+        const script = document.createElement('script');
+        script.src = `https://api.flickr.com/services/rest/?${qs}`;
+        window[cbName] = (data) => { resolve(data); delete window[cbName]; script.remove(); };
+        script.onerror = () => { reject(new Error('Flickr API failed')); delete window[cbName]; script.remove(); };
+        document.head.appendChild(script);
+        setTimeout(() => { if (window[cbName]) { reject(new Error('Flickr API timeout')); delete window[cbName]; script.remove(); } }, 15000);
+      });
+    }
+
+    function flickrImgUrl(photo, size) {
+      return `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_${size}.jpg`;
+    }
+
+    async function fetchAllPhotos() {
+      let allPhotos = [];
+      let page = 1;
+      let totalPages = 1;
+      while (page <= totalPages) {
+        const data = await flickrApiJsonp({
+          method: 'flickr.people.getPublicPhotos',
+          user_id: FLICKR_USER_ID,
+          extras: 'url_c,url_b,url_o,description',
+          per_page: 500,
+          page: page
+        });
+        if (data.stat !== 'ok') throw new Error(data.message || 'API error');
+        totalPages = data.photos.pages;
+        allPhotos = allPhotos.concat(data.photos.photo);
+        page++;
+      }
+      return allPhotos;
+    }
+
+    let photos = [];
+    let currentIdx = 0;
+
+    async function loadGallery() {
+      const gallery = document.getElementById('photo-gallery');
+      try {
+        photos = await fetchAllPhotos();
+        if (photos.length === 0) {
+          gallery.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:60px 0;">No photos found.</p>';
+          return;
+        }
+        const countEl = document.getElementById('photo-count');
+        if (countEl) countEl.textContent = `${photos.length} photos`;
+
+        gallery.innerHTML = photos.map((photo, i) => {
+          const imgSrc = photo.url_c || flickrImgUrl(photo, 'c');
+          const title = photo.title || 'Untitled';
+          return `<div class="gallery-item" data-idx="${i}">
+                    <img src="${imgSrc}" alt="${title}" loading="lazy" />
+                    <div class="gallery-overlay">
+                      <span class="gallery-title">${title}</span>
+                    </div>
+                  </div>`;
+        }).join('');
+
+        gallery.querySelectorAll('.gallery-item').forEach(item => {
+          item.addEventListener('click', () => openLightbox(parseInt(item.dataset.idx)));
+        });
+      } catch (e) {
+        console.error('Flickr load error:', e);
+        gallery.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:60px 0;">Could not load photos from Flickr. Please try again later.</p>';
+      }
+    }
+
+    // ── Lightbox ──
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    const lbCaption = document.getElementById('lightbox-caption');
+
+    function openLightbox(idx) {
+      currentIdx = idx;
+      updateLightbox();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function updateLightbox() {
+      const photo = photos[currentIdx];
+      const bigSrc = photo.url_b || photo.url_c || flickrImgUrl(photo, 'b');
+      lbImg.src = bigSrc;
+      lbImg.alt = photo.title || '';
+      lbCaption.textContent = photo.title || '';
+    }
+
+    document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.getElementById('lightbox-prev').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIdx = (currentIdx - 1 + photos.length) % photos.length;
+      updateLightbox();
+    });
+    document.getElementById('lightbox-next').addEventListener('click', (e) => {
+      e.stopPropagation();
+      currentIdx = (currentIdx + 1) % photos.length;
+      updateLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') { currentIdx = (currentIdx - 1 + photos.length) % photos.length; updateLightbox(); }
+      if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % photos.length; updateLightbox(); }
+    });
+
+
+    /* ═══════════════════════════════════════════════════════════
+       BOOKSHELF — Goodreads RSS via CORS proxy
+       ═══════════════════════════════════════════════════════════ */
+
+    const GOODREADS_USER_ID = '89441953';
+    const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
+    const shelves = ['read', 'currently-reading', 'to-read'];
+
+    function parseRSSBooks(xmlText) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xmlText, 'text/xml');
+      const items = doc.querySelectorAll('item');
+      const books = [];
+      items.forEach(item => {
+        const getText = (tag) => {
+          const el = item.querySelector(tag);
+          return el ? el.textContent.trim() : '';
+        };
+        const title = getText('title');
+        const author = getText('author_name');
+        const link = getText('link');
+        const rating = getText('user_rating');
+        const desc = getText('description');
+        let coverImg = '';
+        const imgMatch = desc.match(/<img[^>]+src="([^"]+)"/);
+        if (imgMatch) {
+          coverImg = imgMatch[1]
+            .replace(/\._S[XY]\d+_/, '._SX300_')
+            .replace(/\/s\//, '/l/');
+        }
+        books.push({ title, author, link, rating: parseInt(rating) || 0, coverImg });
+      });
+      return books;
+    }
+
+    function renderStars(rating) {
+      if (!rating || rating === 0) return '';
+      return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    }
+
+    function renderBooks(books, containerId) {
+      const container = document.getElementById(containerId);
+      if (books.length === 0) {
+        container.innerHTML = '<div class="books-empty"><i class="fas fa-book-open"></i><p>No books in this shelf yet.</p></div>';
+        return;
+      }
+      container.innerHTML = books.map(book => {
+        const coverHtml = book.coverImg
+          ? `<img src="${book.coverImg}" alt="${book.title}" loading="lazy" />`
+          : `<div class="book-cover-placeholder"><i class="fas fa-book"></i></div>`;
+        const ratingHtml = book.rating > 0
+          ? `<div class="book-rating">${renderStars(book.rating)}</div>`
+          : '';
+        return `<a href="${book.link}" target="_blank" rel="noopener noreferrer" class="book-card">
+                  <div class="book-cover">
+                    ${coverHtml}
+                    ${ratingHtml}
+                  </div>
+                  <div class="book-info">
+                    <div class="book-title">${book.title}</div>
+                    <div class="book-author">${book.author}</div>
+                  </div>
+                </a>`;
+      }).join('');
+    }
+
+    async function loadShelf(shelf) {
+      const url = `https://www.goodreads.com/review/list_rss/${GOODREADS_USER_ID}?shelf=${shelf}`;
+      const containerId = `books-${shelf}`;
+      const countId = `count-${shelf}`;
+      try {
+        const resp = await fetch(CORS_PROXY + encodeURIComponent(url));
+        if (!resp.ok) throw new Error('Network error');
+        const text = await resp.text();
+        const books = parseRSSBooks(text);
+        document.getElementById(countId).textContent = books.length;
+        renderBooks(books, containerId);
+      } catch (e) {
+        document.getElementById(containerId).innerHTML =
+          '<div class="books-empty"><i class="fas fa-exclamation-circle"></i><p>Could not load books from Goodreads. Please try again later.</p></div>';
+        document.getElementById(countId).textContent = '—';
+      }
+    }
+
+    // Tab switching
+    document.querySelectorAll('.shelf-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.shelf-tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.shelf-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`shelf-${btn.dataset.shelf}`).classList.add('active');
+      });
+    });
+
+
+    /* ═══════════════════════════════════════════════════════════
+       BOOT — Load both sections in parallel
+       ═══════════════════════════════════════════════════════════ */
+
+    loadGallery();
+    shelves.forEach(loadShelf);
+  </script>
+</body>
+</html>
