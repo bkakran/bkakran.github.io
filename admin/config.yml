@@ -44,6 +44,17 @@ collections:
           - { label: "Status",       name: "status",        widget: "string" }
           - { label: "Footer Tagline", name: "footerTagline", widget: "string" }
           - { label: "Contact Subtitle", name: "contactSubtitle", widget: "text" }
+          - label: "Color Palette"
+            name: "palette"
+            widget: "select"
+            default: "ember"
+            options:
+              - { label: "Ember (Orange)", value: "ember" }
+              - { label: "Gold (Trust)", value: "gold" }
+              - { label: "Forest (Growth)", value: "forest" }
+              - { label: "Earth (Warmth)", value: "earth" }
+              - { label: "Mono (Clarity)", value: "mono" }
+          - { label: "Flickr User ID", name: "flickrId", widget: "string", default: "191338552@N04", hint: "Your Flickr NSID (e.g. 191338552@N04). Find it at flickr.com/services/api/explore/?method=flickr.urls.lookupUser" }
           - { label: "Avatar Image", name: "avatar",        widget: "image",  required: false }
           - { label: "Resume PDF",   name: "resumePdf",     widget: "file",   required: false }
           - { label: "About Text",   name: "about",         widget: "text" }
@@ -69,6 +80,14 @@ collections:
             fields:
               - { label: "Platform", name: "platform", widget: "string" }
               - { label: "URL",      name: "url",      widget: "string" }
+          - label: "Media Coverage"
+            name: "mediaCoverage"
+            widget: "list"
+            fields:
+              - { label: "Outlet Name", name: "outlet", widget: "string" }
+              - { label: "Article Title", name: "title", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Icon (FA class)", name: "icon", widget: "string", default: "fas fa-newspaper" }
           - label: "Contact Items"
             name: "contactItems"
             widget: "list"

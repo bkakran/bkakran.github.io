@@ -1,0 +1,9 @@
+# robots.txt for bkakran.netlify.app
+User-agent: *
+Allow: /
+
+# Block admin CMS from indexing
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://bkakran.netlify.app/sitemap.xml

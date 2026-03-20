@@ -60,22 +60,28 @@ function simpleMarkdown(md = '') {
 }
 
 /* ── THEME ────────────────────────────────────────────────── */
+/* Dark-only theme — no user toggle. Palette controlled by admin via profile.json */
 function initTheme() {
-  const html        = document.documentElement;
-  const toggleBtn   = $('#theme-toggle');
-  const toggleIcon  = $('#theme-icon');
-  const saved       = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', 'light');
+}
 
-  const apply = (theme) => {
-    html.setAttribute('data-theme', theme);
-    toggleIcon.className = theme === 'dark' ? 'fas fa-moon' : 'fas fa-sun';
-    localStorage.setItem('theme', theme);
-  };
+/* ── PALETTE (admin-controlled via profile.json) ─────────── */
+function initPalette() {
+  /* Default palette applied immediately; loadProfile() will override
+     with the admin-configured value from profile.json */
+  document.documentElement.setAttribute('data-palette', 'ember');
+}
 
-  apply(saved);
-  toggleBtn.addEventListener('click', () => {
-    apply(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
+/* ── READING PROGRESS BAR ────────────────────────────────── */
+function initProgress() {
+  const bar = $('#reading-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const scrollTop    = window.scrollY;
+    const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = scrollPercent + '%';
+  }, { passive: true });
 }
 
 /* ── NAVBAR ───────────────────────────────────────────────── */
@@ -181,6 +187,11 @@ function buildSocials(socials = [], className = '') {
 async function loadProfile() {
   const data = await fetch('data/profile.json').then(r => r.json());
 
+  // Admin-controlled palette from profile.json
+  if (data.palette) {
+    document.documentElement.setAttribute('data-palette', data.palette);
+  }
+
   // Page meta
   document.title        = `${data.name} — Portfolio`;
   $('#page-title').textContent = `${data.name} — Portfolio`;
@@ -248,15 +259,33 @@ async function loadProfile() {
     });
   }
 
-  $('#contact-info').innerHTML = (data.contactItems || []).map(c =>
-    `<div class="contact-item reveal">
+  $('#contact-info').innerHTML = (data.contactItems || []).map(c => {
+    let href = '';
+    let clickable = false;
+    const val = c.value || '';
+    if (c.label.toLowerCase() === 'email' || c.icon.includes('envelope')) {
+      href = `mailto:${val}`;
+      clickable = true;
+    } else if (c.label.toLowerCase() === 'linkedin' || c.icon.includes('linkedin')) {
+      href = val.startsWith('http') ? val : `https://${val}`;
+      clickable = true;
+    } else if (val.startsWith('http') || val.includes('.com') || val.includes('.org')) {
+      href = val.startsWith('http') ? val : `https://${val}`;
+      clickable = true;
+    }
+
+    const valueHtml = clickable
+      ? `<a href="${href}" target="_blank" rel="noopener" class="contact-item-link">${val}</a>`
+      : val;
+
+    return `<div class="contact-item reveal">
        <div class="contact-item-icon"><i class="${c.icon}"></i></div>
        <div>
          <div class="contact-item-label">${c.label}</div>
-         <div class="contact-item-value">${c.value}</div>
+         <div class="contact-item-value">${valueHtml}</div>
        </div>
-     </div>`
-  ).join('');
+     </div>`;
+  }).join('');
 
   // Beyond Work
   const bw = data.beyondWork;
@@ -276,6 +305,7 @@ async function loadProfile() {
          <span class="beyond-link">View event <i class="fas fa-arrow-right"></i></span>
        </a>`
     ).join('');
+    initBeyondCarousel();
   }
 
   // Typing animation
@@ -283,6 +313,37 @@ async function loadProfile() {
 
   initReveal();
   return data;
+}
+
+/* ── BEYOND WORK CAROUSEL ────────────────────────────────── */
+function initBeyondCarousel() {
+  const grid = $('#beyond-work-grid');
+  const prev = $('#beyond-prev');
+  const next = $('#beyond-next');
+  if (!grid || !prev || !next) return;
+
+  const scrollAmount = () => {
+    const card = grid.querySelector('.beyond-card');
+    return card ? card.offsetWidth + 16 : 320; // card width + gap
+  };
+
+  const updateButtons = () => {
+    prev.disabled = grid.scrollLeft <= 2;
+    next.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 2;
+  };
+
+  prev.addEventListener('click', () => {
+    grid.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+  });
+  next.addEventListener('click', () => {
+    grid.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+  });
+
+  grid.addEventListener('scroll', updateButtons, { passive: true });
+  // Initial state
+  updateButtons();
+  // Re-check after cards render
+  requestAnimationFrame(updateButtons);
 }
 
 /* ── LOAD SKILLS ──────────────────────────────────────────── */
@@ -301,6 +362,29 @@ async function loadSkills() {
        </div>
      </div>`
   ).join('');
+}
+
+/* ── LOAD MEDIA COVERAGE ─────────────────────────────────── */
+async function loadMedia() {
+  const data = await fetch('data/profile.json').then(r => r.json());
+  const media = data.mediaCoverage || [];
+  const grid  = $('#media-grid');
+  if (!grid || media.length === 0) return;
+
+  grid.innerHTML = media.map(item =>
+    `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="media-card reveal">
+       <div class="media-card-icon">
+         <i class="${item.icon || 'fas fa-newspaper'}"></i>
+       </div>
+       <div class="media-card-body">
+         <span class="media-outlet">${item.outlet}</span>
+         <h4 class="media-title">${item.title}</h4>
+         <span class="media-link">Read article <i class="fas fa-arrow-right"></i></span>
+       </div>
+     </a>`
+  ).join('');
+
+  initReveal();
 }
 
 /* ── LOAD RESUME ──────────────────────────────────────────── */
@@ -603,9 +687,81 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+/* ── LOAD PHOTOGRAPHY (Flickr public feed) ───────────────── */
+async function loadPhotography() {
+  const strip = $('#photo-strip');
+  if (!strip) return;
+
+  // Read Flickr ID from profile.json (or use default)
+  let flickrId = '191338552@N04';
+  try {
+    const profile = await fetch('data/profile.json').then(r => r.json());
+    if (profile.flickrId) flickrId = profile.flickrId;
+  } catch (e) { /* use default */ }
+
+  try {
+    const url = `https://api.flickr.com/services/feeds/photos_public.gne?id=${flickrId}&format=json&nojsoncallback=1`;
+    const data = await fetch(url).then(r => r.json());
+    const photos = (data.items || []).slice(0, 12); // Show up to 12
+
+    if (photos.length === 0) {
+      strip.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">No photos found.</p>';
+      return;
+    }
+
+    strip.innerHTML = photos.map(photo => {
+      // Flickr feed gives media.m as _m size (240px). Upgrade to _c (800px) for better quality
+      const imgSrc = (photo.media && photo.media.m) ? photo.media.m.replace('_m.', '_c.') : '';
+      const title  = photo.title || 'Untitled';
+      const link   = photo.link || '#';
+      return `<a href="${link}" target="_blank" rel="noopener noreferrer" class="photo-card" title="${title}">
+                <img src="${imgSrc}" alt="${title}" loading="lazy" />
+                <div class="photo-overlay">
+                  <span class="photo-title">${title}</span>
+                </div>
+              </a>`;
+    }).join('');
+
+    // Init carousel nav
+    initPhotoCarousel();
+  } catch (e) {
+    strip.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">Could not load photos from Flickr.</p>';
+  }
+}
+
+function initPhotoCarousel() {
+  const strip = $('#photo-strip');
+  const prev  = $('#photo-prev');
+  const next  = $('#photo-next');
+  if (!strip || !prev || !next) return;
+
+  const scrollAmount = () => {
+    const card = strip.querySelector('.photo-card');
+    return card ? card.offsetWidth + 14 : 280;
+  };
+
+  const updateButtons = () => {
+    prev.disabled = strip.scrollLeft <= 2;
+    next.disabled = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 2;
+  };
+
+  prev.addEventListener('click', () => {
+    strip.scrollBy({ left: -scrollAmount() * 2, behavior: 'smooth' });
+  });
+  next.addEventListener('click', () => {
+    strip.scrollBy({ left: scrollAmount() * 2, behavior: 'smooth' });
+  });
+
+  strip.addEventListener('scroll', updateButtons, { passive: true });
+  updateButtons();
+  requestAnimationFrame(updateButtons);
+}
+
 /* ── BOOT ─────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
   initTheme();
+  initPalette();
+  initProgress();
   initNavbar();
   initBackToTop();
 
@@ -613,9 +769,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   await Promise.all([
     loadProfile(),
     loadSkills(),
+    loadMedia(),
     loadResume(),
     loadProjects(),
     loadBlog(),
+    loadPhotography(),
   ]);
 
   initReveal();

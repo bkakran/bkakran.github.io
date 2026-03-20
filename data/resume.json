@@ -116,9 +116,22 @@
       "url": "https://lu.ma/4rppzl9u"
     },
     {
+      "emoji": "📋",
+      "title": "Reviewer — 9th Annual RSE Conference, University of Warwick",
+      "description": "Served as a reviewer for the 9th Annual Conference for Research Software Engineering, hosted by the University of Warwick, United Kingdom (9–11 September 2025). Evaluated research submissions on software engineering practices, tools, and methodologies in academic and scientific computing.",
+      "year": "2025",
+      "url": "https://rsecon25.society-rse.org/"
+    },
+    {
       "emoji": "🏆",
-      "title": "Walmart Impact Award — CTO Recognition",
-      "description": "Received  prestigious Impact Award from the CTO for founding and scaling the Specification Platform team that powered $1B+ revenue impact across Store, Online, and Marketplace.",
+      "title": "Impact Award — Walmart Global Tech",
+      "description": "Recognized as a consistent role model delivering extraordinary impact. Awarded for founding and scaling the Specification Platform team that powered $1B+ revenue impact across Store, Online, and Marketplace.",
+      "year": "2023"
+    },
+    {
+      "emoji": "🎖️",
+      "title": "Bravo Award — Walmart Global Tech",
+      "description": "Recognized with the Bravo Award at Walmart Global Tech for consistent high-impact contributions and outstanding performance across engineering initiatives.",
       "year": "2021"
     },
     {

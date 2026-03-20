@@ -1,7 +1,37 @@
 {
+  "name": "Bhargava Kakrannaya",
+  "shortName": "Bhargava",
+  "tagline": "Engineering leader architecting high-scale distributed systems & GenAI platforms at Walmart Global Tech.",
+  "footerTagline": "Building the future, one system at a time.",
+  "contactSubtitle": "Interested in collaborating, discussing distributed systems, or just want to connect? I'd love to hear from you.",
+
+  "palette": "ember",
+  "flickrId": "191338552@N04",
+  "avatar": "images/me.png",
+  "resumePdf": "",
+
+  "about": "Results-driven engineering leader with over a decade of experience architecting high-scale, distributed systems and data platforms powering Walmart's global eCommerce and omni-channel operations.\n\nI have a proven track record of leading cross-functional teams to deliver innovative solutions that handle 1B+ daily events and enable $1B+ in revenue through platform modernization. I'm passionate about GenAI, agentic systems, and building platforms that eliminate friction at scale — recognized with Walmart's prestigious Impact Award and Tech Forward Award by the CTO for driving critical transformations.\n\nBeyond work, I give back to the AI community by serving as a judge at hackathons — from agentic AI challenges to robotics and community-driven experiments. I enjoy mentoring engineers, thinking deeply about system design, and writing about technology.",
+
+  "roles": [
+    "Engineering Manager",
+    "Distributed Systems Architect",
+    "GenAI Platform Builder",
+    "Engineering Leader"
+  ],
+
+  "highlights": [
+    { "icon": "fas fa-map-marker-alt", "text": "Based in California, USA" },
+    { "icon": "fas fa-briefcase",      "text": "Eng Manager II @ Walmart Global Tech" },
+    { "icon": "fas fa-graduation-cap", "text": "MS Computer Science — NC State University" },
+    { "icon": "fas fa-trophy",         "text": "Walmart Impact Award" },
+    { "icon": "fas fa-users",          "text": "Leading 12+ engineers across distributed teams" },
+    { "icon": "fas fa-bolt",           "text": "Platforms handling 1B+ daily events" },
+    { "icon": "fas fa-gavel",          "text": "Judge at AI & Robotics Hackathons" }
+  ],
+
   "beyondWork": {
     "title": "Beyond Work",
-    "subtitle": "Giving back to the AI builder community",
+    "subtitle": "Giving back to the AI & research community",
     "items": [
       {
         "emoji": "⚖️",
@@ -12,10 +42,18 @@
         "url": "https://lu.ma/fjs446ye"
       },
       {
+        "emoji": "📋",
+        "role": "Conference Reviewer",
+        "event": "9th Annual RSE Conference — University of Warwick",
+        "location": "Warwick, United Kingdom",
+        "description": "Reviewed research submissions for the 9th Annual Conference for Research Software Engineering (9–11 Sep 2025), evaluating papers on software engineering practices, tools, and methodologies in scientific computing.",
+        "url": "https://rsecon25.society-rse.org/"
+      },
+      {
         "emoji": "🤖",
         "role": "Hackathon Judge",
         "event": "Robotic Agents Hackathon",
-        "location": "Online",
+        "location": "San Francisco, CA",
         "description": "Evaluated robotics and agentic AI submissions at this hands-on community hackathon exploring the frontier of robotic reasoning.",
         "url": "https://lu.ma/robotic-agents-hackathon"
       },
@@ -37,90 +75,61 @@
       }
     ]
   },
-  "contactItems": [
-    {
-      "icon": "fas fa-envelope",
-      "label": "Email",
-      "value": "pejakalabhargava@gmail.com"
-    },
-    {
-      "icon": "fas fa-map-marker-alt",
-      "label": "Location",
-      "value": "California, USA"
-    },
-    {
-      "icon": "fab fa-linkedin",
-      "label": "LinkedIn",
-      "value": "linkedin.com/in/bkakran"
-    }
-  ],
-  "resumePdf": "",
-  "socials": [
-    {
-      "platform": "linkedin",
-      "url": "https://linkedin.com/in/bkakran"
-    },
-    {
-      "platform": "email",
-      "url": "pejakalabhargava@gmail.com"
-    }
-  ],
-  "shortName": "Bhargava",
-  "name": "Bhargava Pejakala Kakrannaya",
-  "about": "Results-driven engineering leader with over a decade of experience architecting high-scale, distributed systems and data platforms powering Walmart's global eCommerce and omni-channel operations.\n\nI have a proven track record of leading cross-functional teams to deliver innovative solutions that handle 1B+ daily events and enable $1B+ in revenue through platform modernization. I'm passionate about GenAI, agentic systems, and building platforms that eliminate friction at scale — recognized with Walmart's prestigious Impact Award and Tech Forward Award by the CTO for driving critical transformations.\n\nBeyond work, I give back to the AI community by serving as a judge at hackathons — from agentic AI challenges to robotics and community-driven experiments. I enjoy mentoring engineers, thinking deeply about system design, and writing about technology.",
-  "tagline": "Engineering leader architecting high-scale distributed systems & GenAI platforms at Walmart Global Tech.",
-  "status": "Open to connect",
-  "footerTagline": "Building the future, one system at a time.",
-  "contactSubtitle": "Interested in collaborating, discussing AI/Distributed systems, or just want to connect? I'd love to hear from you.",
-  "avatar": "images/me.jpg",
-  "roles": [
-    "Engineering Manager",
-    "Distributed Systems Architect",
-    "GenAI Platform Builder",
-    "Engineering Leader"
-  ],
+
   "stats": [
+    { "value": "10+",  "label": "Years of Experience" },
+    { "value": "1B+",  "label": "Daily Events Handled" },
+    { "value": "$1B+", "label": "Revenue Impact" },
+    { "value": "0→30+", "label": "Team Scaled" }
+  ],
+
+  "socials": [
+    { "platform": "linkedin", "url": "https://linkedin.com/in/bkakran" },
+    { "platform": "email",    "url": "pejakalabhargava@gmail.com" }
+  ],
+
+  "mediaCoverage": [
     {
-      "value": "10+",
-      "label": "Years of Experience"
+      "outlet": "The Wall Street Journal",
+      "title": "Walmart to Offer Logistics Outside Its Own Marketplace Sales",
+      "url": "https://www.wsj.com/articles/walmart-to-offer-logistics-outside-its-own-marketplace-sales-8b264fba",
+      "icon": "fas fa-newspaper"
     },
     {
-      "value": "1B+",
-      "label": "Daily Events Handled"
+      "outlet": "Bloomberg",
+      "title": "Walmart Takes On Amazon by Adding Pre-Owned Watches, Collectibles to Marketplace",
+      "url": "https://www.bloomberg.com/news/articles/2024-08-27/walmart-takes-on-amazon-by-adding-pre-owned-watches-collectibles-to-marketplace",
+      "icon": "fas fa-newspaper"
     },
     {
-      "value": "$1B+",
-      "label": "Revenue Impact"
+      "outlet": "WSJ Tech News Briefing",
+      "title": "Walmart Offers Logistics Outside Its Own Website",
+      "url": "https://www.wsj.com/podcasts/tech-news-briefing/tnb-tech-minute-walmart-offers-logistics-outside-its-own-website/75327f3b-540b-44e5-af2f-6db9b1eae6f2",
+      "icon": "fas fa-podcast"
+    },
+    {
+      "outlet": "Talk Business & Politics",
+      "title": "The Supply Side: Marketplace an Expanding Growth Engine for Walmart",
+      "url": "https://talkbusiness.net/2024/09/the-supply-side-marketplace-an-expanding-growth-engine-for-walmart/",
+      "icon": "fas fa-newspaper"
+    },
+    {
+      "outlet": "Reuters",
+      "title": "Walmart Unveils New Marketplace Seller Services for Holiday Boost",
+      "url": "https://www.reuters.com/business/retail-consumer/walmart-unveils-new-marketplace-seller-services-holiday-boost-2024-08-27/",
+      "icon": "fas fa-newspaper"
+    },
+    {
+      "outlet": "Walmart Corporate",
+      "title": "Walmart Marketplace Accelerates Growth, Launches Category Expansion & Omnichannel Innovations",
+      "url": "https://corporate.walmart.com/news/2024/08/27/walmart-marketplace-accelerates-growth-launches-category-expansion-multichannel-solutions-and-omnichannel-innovations-for-sellers",
+      "icon": "fas fa-building"
     }
   ],
-  "highlights": [
-    {
-      "icon": "fas fa-map-marker-alt",
-      "text": "Based in California, USA"
-    },
-    {
-      "icon": "fas fa-briefcase",
-      "text": "Eng Manager II @ Walmart Global Tech"
-    },
-    {
-      "icon": "fas fa-graduation-cap",
-      "text": "MS Computer Science — NC State University"
-    },
-    {
-      "icon": "fas fa-trophy",
-      "text": "Walmart Impact Award & Tech Forward Award (CTO)"
-    },
-    {
-      "icon": "fas fa-users",
-      "text": "Leading 12+ engineers across distributed teams"
-    },
-    {
-      "icon": "fas fa-bolt",
-      "text": "Platforms handling 1B+ daily events"
-    },
-    {
-      "icon": "fas fa-gavel",
-      "text": "Judge at AI & Robotics Hackathons"
-    }
+
+  "contactItems": [
+    { "icon": "fas fa-envelope",      "label": "Email",    "value": "pejakalabhargava@gmail.com" },
+    { "icon": "fas fa-map-marker-alt","label": "Location", "value": "California, USA" },
+    { "icon": "fab fa-linkedin",      "label": "LinkedIn", "value": "linkedin.com/in/bkakran" }
   ]
 }
