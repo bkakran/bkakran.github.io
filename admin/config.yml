@@ -1,9 +1,6 @@
 backend:
-  name: github
-  repo: bkakran/bkakran.github.io
+  name: git-gateway
   branch: main
-  auth_type: pkce
-  app_id: Ov23liOHxmR8lZs69EjG
 
 media_folder: "images/blog"
 public_folder: "/images/blog"
