@@ -176,8 +176,10 @@ const SOCIAL_ICONS = {
 function buildSocials(socials = [], className = '') {
   return socials.map(s => {
     const info = SOCIAL_ICONS[s.platform] || { icon: 'fas fa-link', label: s.platform };
-    const href = s.platform === 'email' ? `mailto:${s.url}` : s.url;
-    return `<a href="${href}" target="_blank" rel="noopener" class="social-icon ${className}" title="${info.label}">
+    const isEmail = s.platform === 'email';
+    const href = isEmail ? `mailto:${s.url}` : s.url;
+    const target = isEmail ? '' : ' target="_blank" rel="noopener"';
+    return `<a href="${href}"${target} class="social-icon ${className}" title="${info.label}">
               <i class="${info.icon}"></i>
             </a>`;
   }).join('');
@@ -262,10 +264,12 @@ async function loadProfile() {
   $('#contact-info').innerHTML = (data.contactItems || []).map(c => {
     let href = '';
     let clickable = false;
+    let isEmail = false;
     const val = c.value || '';
     if (c.label.toLowerCase() === 'email' || c.icon.includes('envelope')) {
       href = `mailto:${val}`;
       clickable = true;
+      isEmail = true;
     } else if (c.label.toLowerCase() === 'linkedin' || c.icon.includes('linkedin')) {
       href = val.startsWith('http') ? val : `https://${val}`;
       clickable = true;
@@ -274,8 +278,9 @@ async function loadProfile() {
       clickable = true;
     }
 
+    const target = isEmail ? '' : ' target="_blank" rel="noopener"';
     const valueHtml = clickable
-      ? `<a href="${href}" target="_blank" rel="noopener" class="contact-item-link">${val}</a>`
+      ? `<a href="${href}"${target} class="contact-item-link">${val}</a>`
       : val;
 
     return `<div class="contact-item reveal">
@@ -687,7 +692,37 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ── LOAD PHOTOGRAPHY (Flickr public feed) ───────────────── */
+/* ── LOAD PHOTOGRAPHY (Flickr public feed via JSONP) ─────── */
+function flickrJsonp(flickrId) {
+  return new Promise((resolve, reject) => {
+    const cbName = '_flickrCb' + Date.now();
+    const script = document.createElement('script');
+    script.src = `https://api.flickr.com/services/feeds/photos_public.gne?id=${flickrId}&format=json&jsoncallback=${cbName}`;
+
+    window[cbName] = (data) => {
+      resolve(data);
+      delete window[cbName];
+      script.remove();
+    };
+    script.onerror = () => {
+      reject(new Error('Flickr JSONP failed'));
+      delete window[cbName];
+      script.remove();
+    };
+
+    document.head.appendChild(script);
+
+    // Timeout after 8 seconds
+    setTimeout(() => {
+      if (window[cbName]) {
+        reject(new Error('Flickr timeout'));
+        delete window[cbName];
+        script.remove();
+      }
+    }, 8000);
+  });
+}
+
 async function loadPhotography() {
   const strip = $('#photo-strip');
   if (!strip) return;
@@ -700,9 +735,8 @@ async function loadPhotography() {
   } catch (e) { /* use default */ }
 
   try {
-    const url = `https://api.flickr.com/services/feeds/photos_public.gne?id=${flickrId}&format=json&nojsoncallback=1`;
-    const data = await fetch(url).then(r => r.json());
-    const photos = (data.items || []).slice(0, 12); // Show up to 12
+    const data = await flickrJsonp(flickrId);
+    const photos = (data.items || []).slice(0, 12);
 
     if (photos.length === 0) {
       strip.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">No photos found.</p>';
@@ -722,7 +756,6 @@ async function loadPhotography() {
               </a>`;
     }).join('');
 
-    // Init carousel nav
     initPhotoCarousel();
   } catch (e) {
     strip.innerHTML = '<p style="color:var(--text-muted);text-align:center;padding:40px;">Could not load photos from Flickr.</p>';
