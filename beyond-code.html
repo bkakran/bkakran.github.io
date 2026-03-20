@@ -187,52 +187,23 @@
 
 
     /* ═══════════════════════════════════════════════════════════
-       PHOTOGRAPHY — Flickr REST API via JSONP (all photos)
+       PHOTOGRAPHY — Flickr public feed via JSONP (no API key)
+       Returns 20 most recent photos. For all photos, add a
+       FLICKR_API_KEY env var in Netlify and use the REST API.
        ═══════════════════════════════════════════════════════════ */
 
     const FLICKR_USER_ID = '191338552@N04';
-    const FLICKR_API_KEY = '4bde03e498e5e4e992042dd498285b04';
 
-    function flickrApiJsonp(params) {
+    function flickrJsonp(flickrId) {
       return new Promise((resolve, reject) => {
-        const cbName = '_flickrApi' + Date.now() + Math.random().toString(36).slice(2);
-        const qs = new URLSearchParams({
-          ...params,
-          api_key: FLICKR_API_KEY,
-          format: 'json',
-          jsoncallback: cbName
-        });
+        const cbName = '_flickrCb' + Date.now();
         const script = document.createElement('script');
-        script.src = `https://api.flickr.com/services/rest/?${qs}`;
+        script.src = `https://api.flickr.com/services/feeds/photos_public.gne?id=${flickrId}&format=json&jsoncallback=${cbName}`;
         window[cbName] = (data) => { resolve(data); delete window[cbName]; script.remove(); };
-        script.onerror = () => { reject(new Error('Flickr API failed')); delete window[cbName]; script.remove(); };
+        script.onerror = () => { reject(new Error('Flickr JSONP failed')); delete window[cbName]; script.remove(); };
         document.head.appendChild(script);
-        setTimeout(() => { if (window[cbName]) { reject(new Error('Flickr API timeout')); delete window[cbName]; script.remove(); } }, 15000);
+        setTimeout(() => { if (window[cbName]) { reject(new Error('Flickr timeout')); delete window[cbName]; script.remove(); } }, 10000);
       });
-    }
-
-    function flickrImgUrl(photo, size) {
-      return `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_${size}.jpg`;
-    }
-
-    async function fetchAllPhotos() {
-      let allPhotos = [];
-      let page = 1;
-      let totalPages = 1;
-      while (page <= totalPages) {
-        const data = await flickrApiJsonp({
-          method: 'flickr.people.getPublicPhotos',
-          user_id: FLICKR_USER_ID,
-          extras: 'url_c,url_b,url_o,description',
-          per_page: 500,
-          page: page
-        });
-        if (data.stat !== 'ok') throw new Error(data.message || 'API error');
-        totalPages = data.photos.pages;
-        allPhotos = allPhotos.concat(data.photos.photo);
-        page++;
-      }
-      return allPhotos;
     }
 
     let photos = [];
@@ -241,7 +212,8 @@
     async function loadGallery() {
       const gallery = document.getElementById('photo-gallery');
       try {
-        photos = await fetchAllPhotos();
+        const data = await flickrJsonp(FLICKR_USER_ID);
+        photos = (data.items || []);
         if (photos.length === 0) {
           gallery.innerHTML = '<p style="text-align:center;color:var(--text-muted);padding:60px 0;">No photos found.</p>';
           return;
@@ -250,7 +222,8 @@
         if (countEl) countEl.textContent = `${photos.length} photos`;
 
         gallery.innerHTML = photos.map((photo, i) => {
-          const imgSrc = photo.url_c || flickrImgUrl(photo, 'c');
+          // Upgrade _m (240px) → _c (800px) for gallery thumbnails
+          const imgSrc = (photo.media && photo.media.m) ? photo.media.m.replace('_m.', '_c.') : '';
           const title = photo.title || 'Untitled';
           return `<div class="gallery-item" data-idx="${i}">
                     <img src="${imgSrc}" alt="${title}" loading="lazy" />
@@ -286,7 +259,8 @@
     }
     function updateLightbox() {
       const photo = photos[currentIdx];
-      const bigSrc = photo.url_b || photo.url_c || flickrImgUrl(photo, 'b');
+      // Upgrade _m → _b (1024px) for lightbox
+      const bigSrc = (photo.media && photo.media.m) ? photo.media.m.replace('_m.', '_b.') : '';
       lbImg.src = bigSrc;
       lbImg.alt = photo.title || '';
       lbCaption.textContent = photo.title || '';
@@ -317,7 +291,6 @@
        ═══════════════════════════════════════════════════════════ */
 
     const GOODREADS_USER_ID = '89441953';
-    const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
     const shelves = ['read', 'currently-reading', 'to-read'];
 
     function parseRSSBooks(xmlText) {
@@ -379,11 +352,11 @@
     }
 
     async function loadShelf(shelf) {
-      const url = `https://www.goodreads.com/review/list_rss/${GOODREADS_USER_ID}?shelf=${shelf}`;
       const containerId = `books-${shelf}`;
       const countId = `count-${shelf}`;
       try {
-        const resp = await fetch(CORS_PROXY + encodeURIComponent(url));
+        // Use Netlify Function as server-side proxy (bypasses CORS)
+        const resp = await fetch(`/.netlify/functions/goodreads?shelf=${shelf}&user_id=${GOODREADS_USER_ID}`);
         if (!resp.ok) throw new Error('Network error');
         const text = await resp.text();
         const books = parseRSSBooks(text);
