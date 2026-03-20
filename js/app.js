@@ -257,7 +257,14 @@ async function loadProfile() {
       const from    = $('#c-email').value;
       const subject = $('#c-subject').value;
       const body    = $('#c-message').value;
-      window.location.href = `mailto:${email.url}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} <${from}>\n\n${body}`)}`;
+      const mailtoUrl = `mailto:${email.url}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} <${from}>\n\n${body}`)}`;
+      // Use a temporary <a> click — more reliable than window.location.href for mailto:
+      const a = document.createElement('a');
+      a.href = mailtoUrl;
+      a.style.display = 'none';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
     });
   }
 
