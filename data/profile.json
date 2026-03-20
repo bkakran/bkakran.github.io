@@ -1,34 +1,4 @@
 {
-  "name": "Bhargava Kakrannaya",
-  "shortName": "Bhargava",
-  "tagline": "Engineering leader architecting high-scale distributed systems & GenAI platforms at Walmart Global Tech.",
-  "footerTagline": "Building the future, one system at a time.",
-  "contactSubtitle": "Interested in collaborating, discussing distributed systems, or just want to connect? I'd love to hear from you.",
-
-  "palette": "ember",
-  "flickrId": "191338552@N04",
-  "avatar": "images/me.png",
-  "resumePdf": "",
-
-  "about": "Results-driven engineering leader with over a decade of experience architecting high-scale, distributed systems and data platforms powering Walmart's global eCommerce and omni-channel operations.\n\nI have a proven track record of leading cross-functional teams to deliver innovative solutions that handle 1B+ daily events and enable $1B+ in revenue through platform modernization. I'm passionate about GenAI, agentic systems, and building platforms that eliminate friction at scale — recognized with Walmart's prestigious Impact Award and Tech Forward Award by the CTO for driving critical transformations.\n\nBeyond work, I give back to the AI community by serving as a judge at hackathons — from agentic AI challenges to robotics and community-driven experiments. I enjoy mentoring engineers, thinking deeply about system design, and writing about technology.",
-
-  "roles": [
-    "Engineering Manager",
-    "Distributed Systems Architect",
-    "GenAI Platform Builder",
-    "Engineering Leader"
-  ],
-
-  "highlights": [
-    { "icon": "fas fa-map-marker-alt", "text": "Based in California, USA" },
-    { "icon": "fas fa-briefcase",      "text": "Eng Manager II @ Walmart Global Tech" },
-    { "icon": "fas fa-graduation-cap", "text": "MS Computer Science — NC State University" },
-    { "icon": "fas fa-trophy",         "text": "Walmart Impact Award" },
-    { "icon": "fas fa-users",          "text": "Leading 12+ engineers across distributed teams" },
-    { "icon": "fas fa-bolt",           "text": "Platforms handling 1B+ daily events" },
-    { "icon": "fas fa-gavel",          "text": "Judge at AI & Robotics Hackathons" }
-  ],
-
   "beyondWork": {
     "title": "Beyond Work",
     "subtitle": "Giving back to the AI & research community",
@@ -75,19 +45,37 @@
       }
     ]
   },
-
-  "stats": [
-    { "value": "10+",  "label": "Years of Experience" },
-    { "value": "1B+",  "label": "Daily Events Handled" },
-    { "value": "$1B+", "label": "Revenue Impact" },
-    { "value": "0→30+", "label": "Team Scaled" }
+  "contactItems": [
+    {
+      "icon": "fas fa-envelope",
+      "label": "Email",
+      "value": "pejakalabhargava@gmail.com"
+    },
+    {
+      "icon": "fas fa-map-marker-alt",
+      "label": "Location",
+      "value": "California, USA"
+    },
+    {
+      "icon": "fab fa-linkedin",
+      "label": "LinkedIn",
+      "value": "linkedin.com/in/bkakran"
+    }
   ],
-
+  "flickrId": "191338552@N04",
+  "resumePdf": "",
   "socials": [
-    { "platform": "linkedin", "url": "https://linkedin.com/in/bkakran" },
-    { "platform": "email",    "url": "pejakalabhargava@gmail.com" }
+    {
+      "platform": "linkedin",
+      "url": "https://linkedin.com/in/bkakran"
+    },
+    {
+      "platform": "email",
+      "url": "pejakalabhargava@gmail.com"
+    }
   ],
-
+  "shortName": "Bhargava",
+  "name": "Bhargava Kakrannaya",
   "mediaCoverage": [
     {
       "outlet": "The Wall Street Journal",
@@ -126,10 +114,64 @@
       "icon": "fas fa-building"
     }
   ],
-
-  "contactItems": [
-    { "icon": "fas fa-envelope",      "label": "Email",    "value": "pejakalabhargava@gmail.com" },
-    { "icon": "fas fa-map-marker-alt","label": "Location", "value": "California, USA" },
-    { "icon": "fab fa-linkedin",      "label": "LinkedIn", "value": "linkedin.com/in/bkakran" }
+  "about": "Results-driven engineering leader with over a decade of experience architecting high-scale, distributed systems and data platforms powering Walmart's global eCommerce and omni-channel operations.\n\nI have a proven track record of leading cross-functional teams to deliver innovative solutions that handle 1B+ daily events and enable $1B+ in revenue through platform modernization. I'm passionate about GenAI, agentic systems, and building platforms that eliminate friction at scale — recognized with Walmart's prestigious Impact Award and Tech Forward Award by the CTO for driving critical transformations.\n\nBeyond work, I give back to the AI community by serving as a judge at hackathons — from agentic AI challenges to robotics and community-driven experiments. I enjoy mentoring engineers, thinking deeply about system design, and writing about technology.",
+  "tagline": "Engineering leader architecting high-scale distributed systems & GenAI platforms at Walmart Global Tech.",
+  "footerTagline": "Building the future, one system at a time.",
+  "contactSubtitle": "Interested in collaborating, discussing distributed systems, or just want to connect? I'd love to hear from you.",
+  "avatar": "images/me.png",
+  "palette": "earth",
+  "roles": [
+    "Engineering Manager",
+    "Distributed Systems Architect",
+    "GenAI Platform Builder",
+    "Engineering Leader"
+  ],
+  "stats": [
+    {
+      "value": "10+",
+      "label": "Years of Experience"
+    },
+    {
+      "value": "1B+",
+      "label": "Daily Events Handled"
+    },
+    {
+      "value": "$1B+",
+      "label": "Revenue Impact"
+    },
+    {
+      "value": "0→30+",
+      "label": "Team Scaled"
+    }
+  ],
+  "highlights": [
+    {
+      "icon": "fas fa-map-marker-alt",
+      "text": "Based in California, USA"
+    },
+    {
+      "icon": "fas fa-briefcase",
+      "text": "Eng Manager II @ Walmart Global Tech"
+    },
+    {
+      "icon": "fas fa-graduation-cap",
+      "text": "MS Computer Science — NC State University"
+    },
+    {
+      "icon": "fas fa-trophy",
+      "text": "Walmart Impact Award"
+    },
+    {
+      "icon": "fas fa-users",
+      "text": "Leading 12+ engineers across distributed teams"
+    },
+    {
+      "icon": "fas fa-bolt",
+      "text": "Platforms handling 1B+ daily events"
+    },
+    {
+      "icon": "fas fa-gavel",
+      "text": "Judge at AI & Robotics Hackathons"
+    }
   ]
 }
