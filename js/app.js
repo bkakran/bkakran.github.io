@@ -107,6 +107,16 @@ function initNavbar() {
     });
   });
 
+  // Mobile dropdown toggle
+  document.querySelectorAll('.nav-dropdown > .nav-link').forEach(trigger => {
+    trigger.addEventListener('click', e => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        trigger.closest('.nav-dropdown').classList.toggle('open');
+      }
+    });
+  });
+
   // Highlight active section
   const sections = $$('section[id]');
   const observer = new IntersectionObserver(entries => {
@@ -508,12 +518,7 @@ async function loadProjects() {
   });
 }
 
-/* ── FRONTMATTER PARSER ───────────────────────────────────── */
-/**
- * Splits a Markdown file into { meta, body }.
- * Handles YAML frontmatter between --- delimiters.
- * Supports: strings, numbers, inline arrays [a, b, c]
- */
+/* ── FRONTMATTER PARSER (used by blog.html standalone page) ── */
 function parseFrontmatter(text = '') {
   const match = text.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
   if (!match) return { meta: {}, body: text };
@@ -559,145 +564,23 @@ async function fetchPost(slug) {
   };
 }
 
-/* ── LOAD BLOG ────────────────────────────────────────────── */
-let allPosts = [];
-
-async function loadBlog() {
-  // 1. Load the post manifest (auto-rebuilt by GitHub Action on every push)
-  const index = await fetch('posts/index.json').then(r => r.json());
-  const slugs = (index.posts || []).map(p => p.slug).filter(Boolean);
-
-  // 2. Fetch all .md files in parallel — use index metadata as fast fallback
-  const settled = await Promise.allSettled(slugs.map(fetchPost));
-  allPosts = settled
-    .filter(r => r.status === 'fulfilled')
-    .map(r => r.value)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  if (allPosts.length === 0) {
-    $('#blog-no-results').style.display = 'block';
-    return;
-  }
-
-  // 3. Build tag filters
-  const allTags = [...new Set(allPosts.flatMap(p => p.tags || []))];
-  $('#blog-tags').innerHTML =
-    `<button class="blog-tag-filter active" data-tag="all">All</button>` +
-    allTags.map(t => `<button class="blog-tag-filter" data-tag="${t}">${t}</button>`).join('');
-
-  renderBlog(allPosts);
-
-  // 4. Footer recent posts
-  $('#footer-recent-posts').innerHTML = allPosts.slice(0, 4).map(p =>
-    `<li><a href="#blog" onclick="openPost('${p.slug}')">${p.title}</a></li>`
-  ).join('');
-
-  // 5. Search + tag filtering
-  const searchInput = $('#blog-search');
-  let activeTag = 'all';
-
-  function filterAndRender() {
-    const q = searchInput.value.toLowerCase();
-    const filtered = allPosts.filter(p => {
-      const matchTag  = activeTag === 'all' || (p.tags || []).includes(activeTag);
-      const matchText = !q
-        || p.title.toLowerCase().includes(q)
-        || (p.excerpt || '').toLowerCase().includes(q)
-        || (p.tags || []).some(t => t.toLowerCase().includes(q));
-      return matchTag && matchText;
-    });
-    renderBlog(filtered);
-  }
-
-  searchInput.addEventListener('input', filterAndRender);
-  $$('.blog-tag-filter').forEach(btn => {
-    btn.addEventListener('click', () => {
-      $$('.blog-tag-filter').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeTag = btn.dataset.tag;
-      filterAndRender();
-    });
-  });
+/* ── LOAD FOOTER RECENT POSTS (fetches blog index for footer links) ── */
+async function loadFooterPosts() {
+  const el = $('#footer-recent-posts');
+  if (!el) return;
+  try {
+    const index = await fetch('posts/index.json').then(r => r.json());
+    const slugs = (index.posts || []).map(p => p.slug).filter(Boolean);
+    const settled = await Promise.allSettled(slugs.map(fetchPost));
+    const posts = settled
+      .filter(r => r.status === 'fulfilled')
+      .map(r => r.value)
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+    el.innerHTML = posts.slice(0, 4).map(p =>
+      `<li><a href="blog.html">${p.title}</a></li>`
+    ).join('');
+  } catch (e) { /* footer posts are non-critical */ }
 }
-
-function renderBlog(posts) {
-  const grid   = $('#blog-grid');
-  const noRes  = $('#blog-no-results');
-
-  if (posts.length === 0) {
-    grid.innerHTML = '';
-    noRes.style.display = 'block';
-    return;
-  }
-  noRes.style.display = 'none';
-
-  grid.innerHTML = posts.map(p => {
-    const coverHtml = p.coverImage
-      ? `<img src="${p.coverImage}" alt="${p.title}" loading="lazy" />`
-      : `<div class="blog-card-cover-gradient">${p.emoji || '📝'}</div>`;
-
-    return `<div class="blog-card reveal" data-slug="${p.slug}" onclick="openPost('${p.slug}')">
-      <div class="blog-card-cover">${coverHtml}</div>
-      <div class="blog-card-body">
-        <div class="blog-card-meta">
-          ${p.tags && p.tags[0] ? `<span class="blog-card-meta-tag">${p.tags[0]}</span>` : ''}
-          <span>${formatDate(p.date)}</span>
-        </div>
-        <h3 class="blog-card-title">${p.title}</h3>
-        <p class="blog-card-excerpt">${p.excerpt}</p>
-        <div class="blog-card-footer">
-          <span><i class="fas fa-clock"></i> ${readingTime(p.content)}</span>
-          <span class="blog-read-more">Read more <i class="fas fa-arrow-right"></i></span>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-
-  initReveal();
-}
-
-/* ── BLOG MODAL ───────────────────────────────────────────── */
-window.openPost = function(slug) {
-  const post = allPosts.find(p => p.slug === slug);
-  if (!post) return;
-
-  const coverHtml = post.coverImage
-    ? `<img class="modal-cover" src="${post.coverImage}" alt="${post.title}" />`
-    : `<div class="modal-cover-emoji">${post.emoji || '📝'}</div>`;
-
-  $('#modal-content').innerHTML = `
-    ${coverHtml}
-    <span class="modal-tag">${(post.tags && post.tags[0]) || 'Article'}</span>
-    <h1 class="modal-title">${post.title}</h1>
-    <div class="modal-meta">
-      <span><i class="fas fa-calendar-alt"></i> ${formatDate(post.date)}</span>
-      <span><i class="fas fa-clock"></i> ${readingTime(post.content)}</span>
-      ${post.author ? `<span><i class="fas fa-user"></i> ${post.author}</span>` : ''}
-    </div>
-    <div class="modal-body">${simpleMarkdown(post.content)}</div>
-    ${post.tags ? `<div class="modal-tags">${post.tags.map(t => `<span class="blog-card-meta-tag">${t}</span>`).join('')}</div>` : ''}
-  `;
-
-  const overlay = $('#blog-modal-overlay');
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  overlay.scrollTop = 0;
-};
-
-function closeBlogModal() {
-  $('#blog-modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  $('#modal-close').addEventListener('click', closeBlogModal);
-  $('#blog-modal-overlay').addEventListener('click', e => {
-    if (e.target === $('#blog-modal-overlay')) closeBlogModal();
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeBlogModal();
-  });
-});
 
 /* ── BOOT ─────────────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', async () => {
@@ -714,7 +597,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadMedia(),
     loadResume(),
     loadProjects(),
-    loadBlog(),
+    loadFooterPosts(),
   ]);
 
   initReveal();

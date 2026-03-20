@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" data-palette="ember">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Blog — Bhargava Kakrannaya</title>
+  <meta name="description" content="Ideas, learnings, and opinions on distributed systems, GenAI, and engineering leadership by Bhargava Kakrannaya." />
+  <meta name="theme-color" content="#fafafa" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3DWN6P5YCZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-3DWN6P5YCZ');
+  </script>
+</head>
+<body>
+
+  <!-- ───────────── NAVBAR ───────────── -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>
+        <span>Bhargava</span>
+        <span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="/"               class="nav-link">Home</a></li>
+        <li><a href="/#about"         class="nav-link">About</a></li>
+        <li><a href="/#resume"        class="nav-link">Resume</a></li>
+        <li><a href="/#projects"      class="nav-link">Projects</a></li>
+        <li><a href="blog.html"       class="nav-link active">Blog</a></li>
+        <li class="nav-dropdown">
+          <a href="beyond-code.html" class="nav-link">Beyond Code <i class="fas fa-chevron-down nav-dd-icon"></i></a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="beyond-code.html#photography"><i class="fas fa-camera-retro"></i> Photography</a></li>
+            <li><a href="beyond-code.html#bookshelf"><i class="fas fa-book-open"></i> Bookshelf</a></li>
+          </ul>
+        </li>
+        <li><a href="/#contact"       class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ───────────── PAGE HEADER ───────────── -->
+  <header class="page-hero">
+    <div class="container">
+      <span class="section-tag">My thoughts</span>
+      <h1 class="page-hero-title">Blog</h1>
+      <p class="page-hero-subtitle">Ideas, learnings, and opinions on distributed systems, GenAI, and engineering leadership.</p>
+    </div>
+  </header>
+
+  <!-- ───────────── BLOG ───────────── -->
+  <section class="section">
+    <div class="container">
+
+      <div class="blog-search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="blog-search" placeholder="Search articles..." />
+      </div>
+
+      <div class="blog-tags" id="blog-tags"></div>
+      <div class="blog-grid" id="blog-grid"></div>
+      <div class="blog-no-results" id="blog-no-results" style="display:none">
+        <i class="fas fa-search"></i>
+        <p>No articles found. Try a different search term.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ───────────── BLOG MODAL ───────────── -->
+  <div class="modal-overlay" id="blog-modal-overlay">
+    <div class="blog-modal" id="blog-modal">
+      <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ───────────── FOOTER ───────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom" style="border-top:none; padding-top:0;">
+        <p>&copy; <span id="year-now"></span> Bhargava Kakrannaya</p>
+        <p><a href="/">← Back to portfolio</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    'use strict';
+
+    document.getElementById('year-now').textContent = new Date().getFullYear();
+
+    // ── Hamburger menu ──
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinks.classList.remove('open');
+    }));
+
+    // ── Mobile dropdown toggle ──
+    document.querySelectorAll('.nav-dropdown > .nav-link').forEach(trigger => {
+      trigger.addEventListener('click', e => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          trigger.closest('.nav-dropdown').classList.toggle('open');
+        }
+      });
+    });
+
+    // ── Back to top ──
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ── Helpers ──
+    const $  = (sel) => document.querySelector(sel);
+    const $$ = (sel) => [...document.querySelectorAll(sel)];
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function readingTime(text) {
+      const words = text ? text.split(/\s+/).length : 0;
+      return Math.max(1, Math.ceil(words / 200)) + ' min read';
+    }
+
+    function simpleMarkdown(md = '') {
+      return md
+        .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>')
+        .replace(/`([^`]+)`/g, '<code>$1</code>')
+        .replace(/^##### (.+)$/gm, '<h5>$1</h5>')
+        .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+        .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>')
+        .replace(/^---+$/gm, '<hr>')
+        .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+        .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" style="max-width:100%;border-radius:8px;">')
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
+        .replace(/^\s*[-*+] (.+)$/gm, '<li>$1</li>')
+        .replace(/(<li>[\s\S]*?<\/li>)+/g, '<ul>$&</ul>')
+        .replace(/^\s*\d+\. (.+)$/gm, '<li>$1</li>')
+        .replace(/^(?!<[hupblicer])(?!$)(.+)$/gm, '<p>$1</p>')
+        .replace(/<p><\/p>/g, '');
+    }
+
+    // ── Frontmatter parser ──
+    function parseFrontmatter(text) {
+      const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
+      if (!match) return { meta: {}, body: text };
+      const meta = {};
+      match[1].split('\n').forEach(line => {
+        const idx = line.indexOf(':');
+        if (idx === -1) return;
+        let key = line.slice(0, idx).trim();
+        let val = line.slice(idx + 1).trim();
+        if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'")))
+          val = val.slice(1, -1);
+        if (val.startsWith('[') && val.endsWith(']')) {
+          try { val = JSON.parse(val); } catch (_) {
+            val = val.slice(1, -1).split(',').map(s => s.trim().replace(/^["']|["']$/g, ''));
+          }
+        }
+        meta[key] = val;
+      });
+      return { meta, body: match[2] };
+    }
+
+    // ── Fetch post ──
+    async function fetchPost(slug) {
+      const res = await fetch(`posts/${slug}.md`);
+      if (!res.ok) throw new Error(`Post not found: ${slug}`);
+      const text = await res.text();
+      const { meta, body } = parseFrontmatter(text);
+      const tags = Array.isArray(meta.tags)
+        ? meta.tags
+        : (meta.tags ? meta.tags.split(',').map(t => t.trim()) : []);
+      return {
+        slug,
+        title:      meta.title      || slug,
+        date:       meta.date       || '',
+        author:     meta.author     || '',
+        emoji:      meta.emoji      || '📝',
+        coverImage: meta.coverImage || '',
+        tags,
+        excerpt:    meta.excerpt    || '',
+        content:    body,
+      };
+    }
+
+    // ── Reveal animation ──
+    function initReveal() {
+      const els = $$('.reveal:not(.visible)');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      }, { threshold: 0.1 });
+      els.forEach(el => observer.observe(el));
+    }
+
+
+    /* ═══════════════════════════════════════════════════════════
+       BLOG — Load, render, search, filter, modal
+       ═══════════════════════════════════════════════════════════ */
+
+    let allPosts = [];
+
+    async function loadBlog() {
+      const index = await fetch('posts/index.json').then(r => r.json());
+      const slugs = (index.posts || []).map(p => p.slug).filter(Boolean);
+
+      const settled = await Promise.allSettled(slugs.map(fetchPost));
+      allPosts = settled
+        .filter(r => r.status === 'fulfilled')
+        .map(r => r.value)
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      if (allPosts.length === 0) {
+        $('#blog-no-results').style.display = 'block';
+        return;
+      }
+
+      // Build tag filters
+      const allTags = [...new Set(allPosts.flatMap(p => p.tags || []))];
+      $('#blog-tags').innerHTML =
+        `<button class="blog-tag-filter active" data-tag="all">All</button>` +
+        allTags.map(t => `<button class="blog-tag-filter" data-tag="${t}">${t}</button>`).join('');
+
+      renderBlog(allPosts);
+
+      // Search + tag filtering
+      const searchInput = $('#blog-search');
+      let activeTag = 'all';
+
+      function filterAndRender() {
+        const q = searchInput.value.toLowerCase();
+        const filtered = allPosts.filter(p => {
+          const matchTag  = activeTag === 'all' || (p.tags || []).includes(activeTag);
+          const matchText = !q
+            || p.title.toLowerCase().includes(q)
+            || (p.excerpt || '').toLowerCase().includes(q)
+            || (p.tags || []).some(t => t.toLowerCase().includes(q));
+          return matchTag && matchText;
+        });
+        renderBlog(filtered);
+      }
+
+      searchInput.addEventListener('input', filterAndRender);
+      $$('.blog-tag-filter').forEach(btn => {
+        btn.addEventListener('click', () => {
+          $$('.blog-tag-filter').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          activeTag = btn.dataset.tag;
+          filterAndRender();
+        });
+      });
+    }
+
+    function renderBlog(posts) {
+      const grid   = $('#blog-grid');
+      const noRes  = $('#blog-no-results');
+
+      if (posts.length === 0) {
+        grid.innerHTML = '';
+        noRes.style.display = 'block';
+        return;
+      }
+      noRes.style.display = 'none';
+
+      grid.innerHTML = posts.map(p => {
+        const coverHtml = p.coverImage
+          ? `<img src="${p.coverImage}" alt="${p.title}" loading="lazy" />`
+          : `<div class="blog-card-cover-gradient">${p.emoji || '📝'}</div>`;
+
+        return `<div class="blog-card reveal" data-slug="${p.slug}" onclick="openPost('${p.slug}')">
+          <div class="blog-card-cover">${coverHtml}</div>
+          <div class="blog-card-body">
+            <div class="blog-card-meta">
+              ${p.tags && p.tags[0] ? `<span class="blog-card-meta-tag">${p.tags[0]}</span>` : ''}
+              <span>${formatDate(p.date)}</span>
+            </div>
+            <h3 class="blog-card-title">${p.title}</h3>
+            <p class="blog-card-excerpt">${p.excerpt}</p>
+            <div class="blog-card-footer">
+              <span><i class="fas fa-clock"></i> ${readingTime(p.content)}</span>
+              <span class="blog-read-more">Read more <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+
+      initReveal();
+    }
+
+    // ── Blog Modal ──
+    window.openPost = function(slug) {
+      const post = allPosts.find(p => p.slug === slug);
+      if (!post) return;
+
+      const coverHtml = post.coverImage
+        ? `<img class="modal-cover" src="${post.coverImage}" alt="${post.title}" />`
+        : `<div class="modal-cover-emoji">${post.emoji || '📝'}</div>`;
+
+      $('#modal-content').innerHTML = `
+        ${coverHtml}
+        <span class="modal-tag">${(post.tags && post.tags[0]) || 'Article'}</span>
+        <h1 class="modal-title">${post.title}</h1>
+        <div class="modal-meta">
+          <span><i class="fas fa-calendar-alt"></i> ${formatDate(post.date)}</span>
+          <span><i class="fas fa-clock"></i> ${readingTime(post.content)}</span>
+          ${post.author ? `<span><i class="fas fa-user"></i> ${post.author}</span>` : ''}
+        </div>
+        <div class="modal-body">${simpleMarkdown(post.content)}</div>
+        ${post.tags ? `<div class="modal-tags">${post.tags.map(t => `<span class="blog-card-meta-tag">${t}</span>`).join('')}</div>` : ''}
+      `;
+
+      const overlay = $('#blog-modal-overlay');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      overlay.scrollTop = 0;
+    };
+
+    function closeBlogModal() {
+      $('#blog-modal-overlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    $('#modal-close').addEventListener('click', closeBlogModal);
+    $('#blog-modal-overlay').addEventListener('click', e => {
+      if (e.target === $('#blog-modal-overlay')) closeBlogModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeBlogModal();
+    });
+
+    // ── Boot ──
+    loadBlog();
+  </script>
+</body>
+</html>

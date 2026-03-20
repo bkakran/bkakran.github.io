@@ -44,8 +44,14 @@
         <li><a href="/"               class="nav-link">Home</a></li>
         <li><a href="/#about"         class="nav-link">About</a></li>
         <li><a href="/#resume"        class="nav-link">Resume</a></li>
-        <li><a href="/#blog"          class="nav-link">Blog</a></li>
-        <li><a href="beyond-code.html" class="nav-link active">Beyond Code</a></li>
+        <li><a href="blog.html"       class="nav-link">Blog</a></li>
+        <li class="nav-dropdown">
+          <a href="beyond-code.html" class="nav-link active">Beyond Code <i class="fas fa-chevron-down nav-dd-icon"></i></a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="#photography"><i class="fas fa-camera-retro"></i> Photography</a></li>
+            <li><a href="#bookshelf"><i class="fas fa-book-open"></i> Bookshelf</a></li>
+          </ul>
+        </li>
         <li><a href="/#contact"       class="nav-link">Contact</a></li>
       </ul>
 
@@ -67,76 +73,76 @@
   </header>
 
   <!-- ═══════════════════════════════════════════════════════════
-       SECTION 1 — PHOTOGRAPHY
-       ═══════════════════════════════════════════════════════════ -->
-  <section class="section" id="photography">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Through my lens</span>
-        <h2 class="section-title">Photography</h2>
-        <p class="section-subtitle">Chasing light and capturing moments from travels and everyday life.</p>
-        <p class="page-hero-count" id="photo-count"></p>
-        <a href="https://www.flickr.com/photos/191338552@N04/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="margin-top:12px;">
-          <i class="fab fa-flickr"></i> View full gallery on Flickr
-        </a>
-      </div>
+           SECTION 1 — PHOTOGRAPHY
+           ═══════════════════════════════════════════════════════════ -->
+      <section class="section" id="photography">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Through my lens</span>
+            <h2 class="section-title">Photography</h2>
+            <p class="section-subtitle">Chasing light and capturing moments from travels and everyday life.</p>
+            <p class="page-hero-count" id="photo-count"></p>
+            <a href="https://www.flickr.com/photos/191338552@N04/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="margin-top:12px;">
+              <i class="fab fa-flickr"></i> View full gallery on Flickr
+            </a>
+          </div>
 
-      <div class="photo-gallery" id="photo-gallery">
-        <div class="photo-gallery-loading">
-          <i class="fas fa-spinner fa-spin"></i> Loading photos from Flickr...
+          <div class="photo-gallery" id="photo-gallery">
+            <div class="photo-gallery-loading">
+              <i class="fas fa-spinner fa-spin"></i> Loading photos from Flickr...
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- ── Section divider ── -->
-  <div class="bc-section-divider"></div>
+      <!-- ── Section divider ── -->
+      <div class="bc-section-divider"></div>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       SECTION 2 — BOOKSHELF
-       ═══════════════════════════════════════════════════════════ -->
-  <section class="section" id="bookshelf">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">What I read</span>
-        <h2 class="section-title">Bookshelf</h2>
-        <p class="section-subtitle">A curated collection of books I've read and those on my reading list.</p>
-        <a href="https://www.goodreads.com/user/show/89441953-bhargava-pejakala" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="margin-top:12px;">
-          <i class="fab fa-goodreads"></i> View on Goodreads
-        </a>
-      </div>
+      <!-- ═══════════════════════════════════════════════════════════
+           SECTION 2 — BOOKSHELF
+           ═══════════════════════════════════════════════════════════ -->
+      <section class="section" id="bookshelf">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">What I read</span>
+            <h2 class="section-title">Bookshelf</h2>
+            <p class="section-subtitle">A curated collection of books I've read and those on my reading list.</p>
+            <a href="https://www.goodreads.com/user/show/89441953-bhargava-pejakala" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="margin-top:12px;">
+              <i class="fab fa-goodreads"></i> View on Goodreads
+            </a>
+          </div>
 
-      <!-- Shelf tabs -->
-      <div class="shelf-tabs" id="shelf-tabs">
-        <button class="shelf-tab-btn active" data-shelf="read">
-          <i class="fas fa-book"></i> Read <span class="tab-count" id="count-read">—</span>
-        </button>
-        <button class="shelf-tab-btn" data-shelf="currently-reading">
-          <i class="fas fa-book-reader"></i> Reading <span class="tab-count" id="count-currently-reading">—</span>
-        </button>
-        <button class="shelf-tab-btn" data-shelf="to-read">
-          <i class="fas fa-bookmark"></i> To Read <span class="tab-count" id="count-to-read">—</span>
-        </button>
-      </div>
+          <!-- Shelf tabs -->
+          <div class="shelf-tabs" id="shelf-tabs">
+            <button class="shelf-tab-btn active" data-shelf="read">
+              <i class="fas fa-book"></i> Read <span class="tab-count" id="count-read">—</span>
+            </button>
+            <button class="shelf-tab-btn" data-shelf="currently-reading">
+              <i class="fas fa-book-reader"></i> Reading <span class="tab-count" id="count-currently-reading">—</span>
+            </button>
+            <button class="shelf-tab-btn" data-shelf="to-read">
+              <i class="fas fa-bookmark"></i> To Read <span class="tab-count" id="count-to-read">—</span>
+            </button>
+          </div>
 
-      <!-- Shelf contents -->
-      <div class="shelf-content active" id="shelf-read">
-        <div class="books-grid" id="books-read">
-          <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
+          <!-- Shelf contents -->
+          <div class="shelf-content active" id="shelf-read">
+            <div class="books-grid" id="books-read">
+              <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
+            </div>
+          </div>
+          <div class="shelf-content" id="shelf-currently-reading">
+            <div class="books-grid" id="books-currently-reading">
+              <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
+            </div>
+          </div>
+          <div class="shelf-content" id="shelf-to-read">
+            <div class="books-grid" id="books-to-read">
+              <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="shelf-content" id="shelf-currently-reading">
-        <div class="books-grid" id="books-currently-reading">
-          <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
-        </div>
-      </div>
-      <div class="shelf-content" id="shelf-to-read">
-        <div class="books-grid" id="books-to-read">
-          <div class="books-loading"><i class="fas fa-spinner fa-spin"></i> Loading books…</div>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
   <!-- ───────────── FOOTER ───────────── -->
   <footer class="footer">
@@ -177,6 +183,16 @@
       hamburger.classList.remove('open');
       navLinks.classList.remove('open');
     }));
+
+    // ── Mobile dropdown toggle ──
+    document.querySelectorAll('.nav-dropdown > .nav-link').forEach(trigger => {
+      trigger.addEventListener('click', e => {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          trigger.closest('.nav-dropdown').classList.toggle('open');
+        }
+      });
+    });
 
     // ── Back to top ──
     const btt = document.getElementById('back-to-top');

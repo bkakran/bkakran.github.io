@@ -116,11 +116,16 @@
       <ul class="nav-links" id="nav-links">
         <li><a href="#home"    class="nav-link active">Home</a></li>
         <li><a href="#about"   class="nav-link">About</a></li>
-        <li><a href="#media"   class="nav-link">Media</a></li>
         <li><a href="#resume"  class="nav-link">Resume</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#blog"    class="nav-link">Blog</a></li>
-        <li><a href="beyond-code.html" class="nav-link">Beyond Code</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+        <li class="nav-dropdown">
+          <a href="beyond-code.html" class="nav-link">Beyond Code <i class="fas fa-chevron-down nav-dd-icon"></i></a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="beyond-code.html#photography"><i class="fas fa-camera-retro"></i> Photography</a></li>
+            <li><a href="beyond-code.html#bookshelf"><i class="fas fa-book-open"></i> Bookshelf</a></li>
+          </ul>
+        </li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
@@ -218,29 +223,6 @@
     </div>
   </section>
 
-  <!-- ───────────────────── SKILLS ───────────────────── -->
-  <section class="section section-alt" id="skills">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">What I know</span>
-        <h2 class="section-title">Skills & Technologies</h2>
-      </div>
-      <div class="skills-grid" id="skills-grid"></div>
-    </div>
-  </section>
-
-  <!-- ───────────────────── MEDIA COVERAGE ───────────────────── -->
-  <section class="section section-alt" id="media">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">In the press</span>
-        <h2 class="section-title">Media Coverage</h2>
-        <p class="section-subtitle">Work featured in leading publications</p>
-      </div>
-      <div class="media-grid" id="media-grid"></div>
-    </div>
-  </section>
-
   <!-- ───────────────────── RESUME ───────────────────── -->
   <section class="section" id="resume">
     <div class="container">
@@ -273,6 +255,17 @@
     </div>
   </section>
 
+  <!-- ───────────────────── SKILLS ───────────────────── -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What I know</span>
+        <h2 class="section-title">Skills & Technologies</h2>
+      </div>
+      <div class="skills-grid" id="skills-grid"></div>
+    </div>
+  </section>
+
   <!-- ───────────────────── PROJECTS ───────────────────── -->
   <section class="section section-alt" id="projects">
     <div class="container">
@@ -286,36 +279,17 @@
     </div>
   </section>
 
-  <!-- ───────────────────── BLOG ───────────────────── -->
-  <section class="section" id="blog">
+  <!-- ───────────────────── MEDIA COVERAGE ───────────────────── -->
+  <section class="section section-alt" id="media">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">My thoughts</span>
-        <h2 class="section-title">Blog</h2>
-        <p class="section-subtitle">Ideas, learnings, and opinions.</p>
+        <span class="section-tag">In the press</span>
+        <h2 class="section-title">Media Coverage</h2>
+        <p class="section-subtitle">Work featured in leading publications</p>
       </div>
-
-      <div class="blog-search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" id="blog-search" placeholder="Search articles..." />
-      </div>
-
-      <div class="blog-tags" id="blog-tags"></div>
-      <div class="blog-grid" id="blog-grid"></div>
-      <div class="blog-no-results" id="blog-no-results" style="display:none">
-        <i class="fas fa-search"></i>
-        <p>No articles found. Try a different search term.</p>
-      </div>
+      <div class="media-grid" id="media-grid"></div>
     </div>
   </section>
-
-  <!-- ───────────────────── BLOG MODAL ───────────────────── -->
-  <div class="modal-overlay" id="blog-modal-overlay">
-    <div class="blog-modal" id="blog-modal">
-      <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
-      <div class="modal-content" id="modal-content"></div>
-    </div>
-  </div>
 
   <!-- ───────────────────── CONTACT ───────────────────── -->
   <section class="section section-alt" id="contact">
@@ -379,7 +353,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#resume">Resume</a></li>
             <li><a href="#projects">Projects</a></li>
-            <li><a href="#blog">Blog</a></li>
+            <li><a href="blog.html">Blog</a></li>
             <li><a href="beyond-code.html">Beyond Code</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
