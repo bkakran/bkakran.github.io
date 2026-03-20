@@ -1,49 +1,14 @@
-# ============================================================
-# DECAP CMS CONFIGURATION
-# ============================================================
-# SETUP STEPS (one-time, ~5 minutes):
-#
-# 1. Replace YOUR_GITHUB_USERNAME and YOUR_REPO_NAME below
-#    with your actual GitHub username and repository name.
-#    Example: repo: bhargava/bhargava.github.io
-#
-# 2. Create a GitHub OAuth App:
-#    → github.com/settings/developers → "New OAuth App"
-#    → Application name: "My Portfolio CMS"
-#    → Homepage URL: https://YOUR_USERNAME.github.io
-#    → Authorization callback URL: https://YOUR_USERNAME.github.io/admin/
-#    → Click "Register application"
-#    → Copy the "Client ID" and paste it as app_id below
-#
-# 3. Push to GitHub, visit https://YOUR_USERNAME.github.io/admin/
-#    → Click "Login with GitHub" → done!
-#
-# LOCAL DEVELOPMENT (no OAuth needed):
-#    → In a terminal: npx decap-server
-#    → In another terminal: python3 -m http.server 3000
-#    → Open http://localhost:3000/admin/
-# ============================================================
-
-# ── Backend (GitHub) ───────────────────────────────────────
 backend:
   name: github
-  repo: bkakran/bkakran.github.io   # ← CHANGE THIS
+  repo: bkakran/bkakran.github.io
   branch: main
   auth_type: pkce
-  app_id: Ov23liOHxmR8lZs69EjG     # ← CHANGE THIS
+  app_id: Ov23liOHxmR8lZs69EjG
 
-# ── Local development override ─────────────────────────────
-# Uncomment the line below when running locally with `npx decap-server`
-# local_backend: true
-
-# ── Media ──────────────────────────────────────────────────
 media_folder: "images/blog"
 public_folder: "/images/blog"
 
-# ── Collections ────────────────────────────────────────────
 collections:
-
-  # ── Blog Posts ───────────────────────────────────────────
   - name: "posts"
     label: "Blog Posts"
     label_singular: "Blog Post"
@@ -52,55 +17,14 @@ collections:
     delete: true
     slug: "{{slug}}"
     identifier_field: title
-    summary: "{{title}} — {{date}}"
+    summary: "{{title}} -- {{date}}"
     sortable_fields: ["date", "title"]
-    view_filters:
-      - label: "All Posts"
-        field: title
-        pattern: ""
     fields:
-
-      - label: "Title"
-        name: "title"
-        widget: "string"
-        hint: "The post headline shown on cards and the browser tab."
-
-      - label: "Date"
-        name: "date"
-        widget: "datetime"
-        format: "YYYY-MM-DD"
-        date_format: "YYYY-MM-DD"
-        time_format: false
-        hint: "Publication date."
-
-      - label: "Author"
-        name: "author"
-        widget: "string"
-        default: "Bhargava Pejakala Kakrannaya"
-
-      - label: "Emoji"
-        name: "emoji"
-        widget: "string"
-        default: "📝"
-        hint: "A single emoji shown as the post cover when no image is set."
-
-      - label: "Tags"
-        name: "tags"
-        widget: "list"
-        hint: "Comma-separated tags. The first tag is shown as the primary label."
-
-      - label: "Excerpt"
-        name: "excerpt"
-        widget: "text"
-        hint: "1-2 sentence summary shown on the blog card. Keep it under 160 characters."
-
-      - label: "Cover Image"
-        name: "coverImage"
-        widget: "image"
-        required: false
-        hint: "Optional hero image. If left blank, the emoji is used instead."
-
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
-        hint: "Write your full post here. Supports headers, bold, italic, code blocks, images, and links."
+      - { label: "Title",       name: "title",      widget: "string" }
+      - { label: "Date",        name: "date",        widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Author",      name: "author",      widget: "string",   default: "Bhargava Pejakala Kakrannaya" }
+      - { label: "Emoji",       name: "emoji",       widget: "string",   default: "📝" }
+      - { label: "Tags",        name: "tags",        widget: "list" }
+      - { label: "Excerpt",     name: "excerpt",     widget: "text" }
+      - { label: "Cover Image", name: "coverImage",  widget: "image",    required: false }
+      - { label: "Body",        name: "body",        widget: "markdown" }
