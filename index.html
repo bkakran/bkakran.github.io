@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Personal portfolio, resume and blog" />
+  <title id="page-title">My Portfolio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Google Analytics (GA4) — replace G-XXXXXXXXXX with your Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3DWN6P5YCZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-3DWN6P5YCZ');
+  </script>
+</head>
+<body>
+
+  <!-- ───────────────────── NAVBAR ───────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-bracket">&lt;</span>
+        <span id="nav-name">Dev</span>
+        <span class="logo-bracket">/&gt;</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home"    class="nav-link active">Home</a></li>
+        <li><a href="#about"   class="nav-link">About</a></li>
+        <li><a href="#resume"  class="nav-link">Resume</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#blog"    class="nav-link">Blog</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+          <i class="fas fa-moon" id="theme-icon"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ───────────────────── HERO ───────────────────── -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="grid-lines"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-avatar-wrap">
+        <div class="hero-avatar" id="hero-avatar">
+          <img alt="Profile Photo" id="avatar-img" onerror="this.style.display='none';document.getElementById('avatar-initials').style.display='flex'" />
+          <div class="avatar-initials" id="avatar-initials"></div>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span id="hero-status">Open to opportunities</span>
+        </div>
+      </div>
+
+      <div class="hero-text">
+        <p class="hero-greeting">Hi there, I'm</p>
+        <h1 class="hero-name" id="hero-name">Your Name</h1>
+        <div class="hero-roles">
+          <span id="hero-roles-text"></span>
+          <span class="cursor-blink">|</span>
+        </div>
+        <p class="hero-bio" id="hero-bio">A passionate developer building impactful digital experiences.</p>
+
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary">
+            <i class="fas fa-envelope"></i> Get in Touch
+          </a>
+          <a href="#resume" class="btn btn-outline">
+            <i class="fas fa-file-alt"></i> View Resume
+          </a>
+          <a href="" class="btn btn-ghost" id="resume-download" download target="_blank">
+            <i class="fas fa-download"></i> Download CV
+          </a>
+        </div>
+
+        <div class="hero-socials" id="hero-socials"></div>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-hint">
+      <span>Scroll</span>
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </section>
+
+  <!-- ───────────────────── ABOUT ───────────────────── -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Who I am</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p id="about-long"></p>
+          <div class="about-highlights" id="about-highlights"></div>
+        </div>
+        <div class="about-stats" id="about-stats"></div>
+      </div>
+
+      <!-- Beyond Work -->
+      <div id="beyond-work-section" style="display:none; margin-top: 72px;">
+        <div class="beyond-work-header">
+          <h3 id="beyond-work-title"></h3>
+          <p id="beyond-work-subtitle"></p>
+        </div>
+        <div class="beyond-work-grid" id="beyond-work-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── SKILLS ───────────────────── -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What I know</span>
+        <h2 class="section-title">Skills & Technologies</h2>
+      </div>
+      <div class="skills-grid" id="skills-grid"></div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── RESUME ───────────────────── -->
+  <section class="section" id="resume">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">My journey</span>
+        <h2 class="section-title">Experience & Education</h2>
+      </div>
+
+      <div class="resume-tabs">
+        <button class="tab-btn active" data-tab="experience">
+          <i class="fas fa-briefcase"></i> Experience
+        </button>
+        <button class="tab-btn" data-tab="education">
+          <i class="fas fa-graduation-cap"></i> Education
+        </button>
+        <button class="tab-btn" data-tab="achievements">
+          <i class="fas fa-trophy"></i> Achievements
+        </button>
+      </div>
+
+      <div class="tab-content active" id="tab-experience">
+        <div class="timeline" id="experience-timeline"></div>
+      </div>
+      <div class="tab-content" id="tab-education">
+        <div class="timeline" id="education-timeline"></div>
+      </div>
+      <div class="tab-content" id="tab-achievements">
+        <div class="achievements-grid" id="achievements-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── PROJECTS ───────────────────── -->
+  <section class="section section-alt" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">What I've built</span>
+        <h2 class="section-title">Projects</h2>
+      </div>
+
+      <div class="project-filters" id="project-filters"></div>
+      <div class="projects-grid" id="projects-grid"></div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── BLOG ───────────────────── -->
+  <section class="section" id="blog">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">My thoughts</span>
+        <h2 class="section-title">Blog</h2>
+        <p class="section-subtitle">Ideas, learnings, and opinions.</p>
+      </div>
+
+      <div class="blog-search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" id="blog-search" placeholder="Search articles..." />
+      </div>
+
+      <div class="blog-tags" id="blog-tags"></div>
+      <div class="blog-grid" id="blog-grid"></div>
+      <div class="blog-no-results" id="blog-no-results" style="display:none">
+        <i class="fas fa-search"></i>
+        <p>No articles found. Try a different search term.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── BLOG MODAL ───────────────────── -->
+  <div class="modal-overlay" id="blog-modal-overlay">
+    <div class="blog-modal" id="blog-modal">
+      <button class="modal-close" id="modal-close"><i class="fas fa-times"></i></button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <!-- ───────────────────── CONTACT ───────────────────── -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Let's connect</span>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle" id="contact-subtitle">Have a project in mind or just want to say hi? I'd love to hear from you.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info" id="contact-info"></div>
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="c-name">Your Name</label>
+              <input type="text" id="c-name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="c-email">Email</label>
+              <input type="email" id="c-email" placeholder="john@example.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="c-subject">Subject</label>
+            <input type="text" id="c-subject" placeholder="What's this about?" required />
+          </div>
+          <div class="form-group">
+            <label for="c-message">Message</label>
+            <textarea id="c-message" rows="5" placeholder="Write your message here..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+          <div class="form-note">
+            <i class="fas fa-info-circle"></i>
+            This form opens your email client. Or reach me directly at <span id="contact-email-link"></span>.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────────────────── FOOTER ───────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#home" class="nav-logo">
+            <span class="logo-bracket">&lt;</span>
+            <span id="footer-name">Dev</span>
+            <span class="logo-bracket">/&gt;</span>
+          </a>
+          <p id="footer-tagline">Building the future, one line at a time.</p>
+          <div class="footer-socials" id="footer-socials"></div>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-recent-posts">
+          <h4>Recent Posts</h4>
+          <ul id="footer-recent-posts"></ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p id="footer-copyright"></p>
+        <p>Built with <i class="fas fa-heart" style="color: var(--accent)"></i> and hosted on <strong>GitHub Pages</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ───────────────────── BACK TO TOP ───────────────────── -->
+  <button class="back-to-top" id="back-to-top" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

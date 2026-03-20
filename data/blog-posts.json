@@ -1,0 +1,4 @@
+{
+  "_deprecated": "This file is no longer used. Blog posts are now stored as individual Markdown files in the /posts/ directory. Add new posts via the CMS at /admin/ or by creating a new .md file in /posts/.",
+  "posts": []
+}

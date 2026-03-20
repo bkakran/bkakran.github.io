@@ -1,0 +1,287 @@
+{
+  "experience": [
+    {
+      "role": "Software Engineer Manager II",
+      "company": "Walmart Global Tech",
+      "location": "Sunnyvale, USA",
+      "from": "Oct 2023",
+      "to": null,
+      "description": "Leading a team of 12+ engineers building high-throughput, distributed ingestion systems handling 1B+ daily item, price, and inventory update events. Spearheaded core ingestion platform powering data flows across Store, Online, and Marketplace — contributing to $1B+ in annual revenue through marketplace expansion. Built a GenAI-powered, supplier-native item ingestion framework that seamlessly processes items across diverse data formats into the catalog, eliminating duplication and improving onboarding efficiency. Built the NOF ticket resolution agent, eliminating manual triage for ~3.4K monthly issues and reducing resolution times from 1 week to near real-time. Integrated Generative AI into item setup, increasing content quality from 50% to 90%+ and reducing manual effort from 2 hours to 5 minutes. Developed the Configurable Spec Parser — a metadata-driven onboarding framework that reduced setup time from 2 weeks to 5 minutes, saving ~80 person-days, now used across 7+ major initiatives. Re-architected ingestion pipeline to a reactive, non-blocking model; scaled to handle 500M+ items/day during peak load with full SLA compliance. Recognized with Tech Forward Award by the CTO for exceptional business impact.",
+      "tags": ["GenAI", "Agentic Systems", "Java", "Kafka", "Distributed Systems", "Data Pipelines", "Kubernetes", "Spring"]
+    },
+    {
+      "role": "Software Engineer Manager I",
+      "company": "Walmart Global Tech",
+      "location": "Sunnyvale, USA",
+      "from": "Oct 2021",
+      "to": "Sep 2023",
+      "description": "Designed an on-demand schema loading system that reduced memory usage by 90% and validation time from 20 minutes to 8 seconds, enabling efficient scaling to support 6,000+ product-type schemas. Built end-to-end real-time validation across ingestion flows, identifying ~100K data errors daily and significantly boosting CSAT scores. Re-architected platform components to support zero-code onboarding of new tenants — enabled  flow in just 2 days with zero production downtime. Consolidated Excel and JSON converters into a Universal Data Mapper used across 10+ initiatives, reducing onboarding time by 70–80%. Built a grammar-based routing engine for feed traffic with zero-code updates in under 5 minutes.",
+      "tags": ["Java", "Schema Validation", "Multi-Tenancy", "Data Pipelines", "Spring", "Kafka"]
+    },
+    {
+      "role": "Staff Software Engineer",
+      "company": "Walmart Global Tech",
+      "location": "Sunnyvale, USA",
+      "from": "Aug 2019",
+      "to": "Oct 2021",
+      "description": "Founding member of Specification Platform team — the backbone of the ingestion platform. Led the initial proof of concept, secured executive sponsorship and funding, and scaled the team to 30+ engineers globally. The platform powered 50+ high-impact initiatives across Store, Online, and Marketplace with a revenue impact in the billions. Architected and built a centralized schema registry from the ground up, reducing onboarding time from 3 weeks to 2 hours and powering 20+ major initiatives. Engineered a dynamic mapping engine that cut onboarding time from 3 weeks to 15 minutes by auto-generating mappings from catalog data flows. Recognized with the prestigious Impact Award from the CTO for exceptional contributions.",
+      "tags": ["Java", "Schema Registry", "Distributed Systems", "Data Pipelines", "Spring", "Solr", "Cassandra"]
+    },
+    {
+      "role": "Senior Software Engineer",
+      "company": "Walmart Global Tech",
+      "location": "Sunnyvale, USA",
+      "from": "Apr 2017",
+      "to": "Aug 2019",
+      "description": "Engineered core components for online and store catalog platform, driving migration from a legacy stack to a modern architecture — reduced item setup time from 2+ days to just 4 hours. Implemented Walmart's first automated item spec generation tool, cutting artifact creation time from 5 days to just minutes. Designed and implemented an event-driven compliance pipeline for the item setup system supporting business, ensuring real-time policy enforcement across millions of SKUs.",
+      "tags": ["Java", "Microservices", "Kafka", "Spring", "Event-Driven Architecture"]
+    },
+    {
+      "role": "Software Engineer III",
+      "company": "Walmart Global Tech",
+      "location": "Sunnyvale, USA",
+      "from": "Jun 2015",
+      "to": "Apr 2017",
+      "description": "Implemented robust validation and enrichment services to enhance catalog data quality, driving higher accuracy, completeness, and operational efficiency in item onboarding. Developed a comprehensive analytics module to track key performance metrics such as end-to-end item setup time, error rates, and success rates, enabling data-driven optimization and continuous improvement across the platform.",
+      "tags": ["Java", "Data Quality", "Analytics", "Spring", "Solr"]
+    },
+    {
+      "role": "Software Engineering Intern",
+      "company": "Walmart Global Tech",
+      "location": "Sunnyvale, USA",
+      "from": "May 2014",
+      "to": "May 2015",
+      "description": "Developed the Merchandising Center Tool enabling merchants to seamlessly interact with suppliers, streamlining collaboration and improving supply chain visibility. Implemented scalable microservices and built a real-time reporting framework, enhancing data accessibility and decision-making. Built a robust performance test suite ensuring high reliability and system performance at scale.",
+      "tags": ["Java", "Microservices", "Reporting", "Performance Testing"]
+    },
+    {
+      "role": "Associate Technology Level II",
+      "company": "Sapient Consulting Private Limited",
+      "location": "Bengaluru, India",
+      "from": "Jul 2010",
+      "to": "Jul 2013",
+      "description": "Led the implementation of the browse e-commerce platform for JCPenney.com using the ATG framework, enhancing site navigation and scalability for millions of users. Developed high-performing product display pages and integrated social media features into the item catalog. Built a product personalization module that dynamically tailored shopping experiences based on user behavior. Implemented multi-level caching strategies with Akamai, significantly improving page load times. Designed and integrated product search functionality leveraging Endeca and third-party web services. Delivered a content management system for Telecharge.com.",
+      "tags": ["ATG Framework", "Java", "Endeca", "Akamai", "eCommerce", "CMS"]
+    }
+  ],
+
+  "education": [
+    {
+      "degree": "Master of Science — Computer Science",
+      "institution": "NC State University",
+      "location": "Raleigh, USA",
+      "from": "2013",
+      "to": "May 2015",
+      "description": "Graduate studies in Computer Science with focus on distributed systems, algorithms, and software engineering.",
+      "tags": ["Distributed Systems", "Algorithms", "Software Engineering"]
+    },
+    {
+      "degree": "Bachelor of Science — Computer Science",
+      "institution": "PES University",
+      "location": "Bangalore, India",
+      "from": "2006",
+      "to": "Jun 2010",
+      "description": "Undergraduate studies in Computer Science and Engineering covering core CS fundamentals, data structures, and software development.",
+      "tags": ["Computer Science", "Data Structures", "Software Development"]
+    }
+  ],
+
+  "achievements": [
+    {
+      "emoji": "⚖️",
+      "title": "Judge — Weekend Agent Hack, Mountain View",
+      "description": "Evaluated agentic AI projects at this competitive Silicon Valley hackathon, where teams built autonomous systems from scratch over a single weekend.",
+      "year": "2024",
+      "url": "https://lu.ma/fjs446ye"
+    },
+    {
+      "emoji": "🤖",
+      "title": "Judge — Robotic Agents Hackathon",
+      "description": "Judged robotics and agentic AI submissions at a community-driven hackathon exploring the frontier of robotic reasoning and autonomous decision-making.",
+      "year": "2024",
+      "url": "https://lu.ma/robotic-agents-hackathon"
+    },
+    {
+      "emoji": "🌍",
+      "title": "Judge — Cursor Community Hackathon, Heilbronn",
+      "description": "International hackathon in Germany where participants built AI-powered developer tools. Evaluated projects on creativity, technical depth, and real-world impact.",
+      "year": "2024",
+      "url": "https://lu.ma/k3jwtb5t"
+    },
+    {
+      "emoji": "🕵️",
+      "title": "Judge — OaklandClaw: The Penthouse Heist",
+      "description": "Creative AI experiment blending game design and agentic AI. Judged teams on their ability to build autonomous agents that solve immersive, story-driven challenges.",
+      "year": "2024",
+      "url": "https://lu.ma/4rppzl9u"
+    },
+    {
+      "emoji": "🏆",
+      "title": "Walmart Impact Award — CTO Recognition",
+      "description": "Received  prestigious Impact Award from the CTO for founding and scaling the Specification Platform team that powered $1B+ revenue impact across Store, Online, and Marketplace.",
+      "year": "2021"
+    },
+    {
+      "emoji": "⭐",
+      "title": "Tech Forward Award — CTO Recognition",
+      "description": "Awarded by  CTO for exceptional business impact as a key contributor to the Global Item Setup platform, enabling multi-channel, multi-tenant item onboarding.",
+      "year": "2023"
+    },
+    {
+      "emoji": "🤖",
+      "title": "GenAI Content Quality: 50% → 90%+",
+      "description": "Integrated Generative AI into item setup workflows, increasing content quality score from 50% to 90%+ and reducing manual effort from 2 hours to just 5 minutes per item.",
+      "year": "2024"
+    },
+    {
+      "emoji": "⚡",
+      "title": "500M+ Items/Day at Peak — Zero SLA Breach",
+      "description": "Re-architected ingestion pipeline to a reactive, non-blocking model with back pressure; scaled to handle 500M+ items/day during peak load with full SLA compliance.",
+      "year": "2024"
+    },
+    {
+      "emoji": "🔧",
+      "title": "Configurable Spec Parser — 80 Person-Days Saved",
+      "description": "Built a metadata-driven onboarding framework reducing setup time from 2 weeks to 5 minutes, saving ~80 person-days. Now used across 7+ major initiatives.",
+      "year": "2024"
+    },
+    {
+      "emoji": "🧠",
+      "title": "90% Memory Reduction — Schema Validation System",
+      "description": "Designed an on-demand schema loading system that reduced memory usage by 90% and validation time from 20 minutes to 8 seconds, supporting 6,000+ product-type schemas.",
+      "year": "2022"
+    },
+    {
+      "emoji": "📰",
+      "title": "Platform Featured in Press & Media",
+      "description": "Core ingestion platform was featured multiple times in press and media for its innovation and strategic business impact.",
+      "year": "2024"
+    },
+    {
+      "emoji": "👥",
+      "title": "Scaled Team from 0 → 30+ Engineers",
+      "description": "As a founding member of Specification Platform, led initial proof of concept, secured executive sponsorship, and scaled the team to 30+ engineers globally.",
+      "year": "2021"
+    }
+  ],
+
+  "skills": [
+    {
+      "category": "AI & GenAI",
+      "items": [
+        { "name": "Agentic Systems", "icon": "fas fa-robot" },
+        { "name": "Generative AI",   "icon": "fas fa-brain" },
+        { "name": "Machine Learning","icon": "fas fa-chart-line" },
+        { "name": "LLMs",            "icon": "" },
+        { "name": "RAG Pipelines",   "icon": "" }
+      ]
+    },
+    {
+      "category": "Languages",
+      "items": [
+        { "name": "Java",   "icon": "fab fa-java" },
+        { "name": "Python", "icon": "fab fa-python" },
+        { "name": "SQL",    "icon": "" }
+      ]
+    },
+    {
+      "category": "Distributed Systems & Data",
+      "items": [
+        { "name": "Distributed Systems", "icon": "" },
+        { "name": "Data Pipelines",       "icon": "" },
+        { "name": "Kafka",                "icon": "" },
+        { "name": "Apache Storm",         "icon": "" },
+        { "name": "Apache Spark",         "icon": "" },
+        { "name": "Big Data",             "icon": "" },
+        { "name": "Microservices",        "icon": "" },
+        { "name": "Event-Driven Arch.",   "icon": "" }
+      ]
+    },
+    {
+      "category": "Databases & Search",
+      "items": [
+        { "name": "Cassandra", "icon": "" },
+        { "name": "Solr",      "icon": "" },
+        { "name": "MySQL",     "icon": "" },
+        { "name": "Redis",     "icon": "" }
+      ]
+    },
+    {
+      "category": "Infrastructure & Tools",
+      "items": [
+        { "name": "Spring / Spring Boot", "icon": "" },
+        { "name": "Kubernetes",           "icon": "" },
+        { "name": "Docker",               "icon": "fab fa-docker" },
+        { "name": "Git",                  "icon": "fab fa-git-alt" }
+      ]
+    },
+    {
+      "category": "Leadership & Practices",
+      "items": [
+        { "name": "Engineering Management", "icon": "fas fa-users" },
+        { "name": "System Design",          "icon": "fas fa-sitemap" },
+        { "name": "Agile / Scrum",          "icon": "" },
+        { "name": "Cross-Functional Leadership", "icon": "" },
+        { "name": "Mentoring & Coaching",   "icon": "" },
+        { "name": "Platform Architecture",  "icon": "" }
+      ]
+    }
+  ],
+
+  "projects": [
+    {
+      "title": "GenAI Item Ingestion Framework",
+      "description": "Supplier-native item ingestion framework powered by GenAI that seamlessly processes items across diverse data formats into the catalog — eliminating duplication, reducing friction, and significantly improving onboarding efficiency.",
+      "emoji": "🤖",
+      "tags": ["GenAI", "Java", "Distributed Systems"],
+      "github": "",
+      "demo": "",
+      "featured": true
+    },
+    {
+      "title": "Ticket Resolution Agent",
+      "description": "Agentic solution eliminating manual triage for ~3.4K monthly issues, saving hundreds of labor hours and reducing resolution times from 1 week to near real-time while improving store and customer experience.",
+      "emoji": "⚡",
+      "tags": ["Agentic Systems", "GenAI", "Java"],
+      "github": "",
+      "demo": "",
+      "featured": true
+    },
+    {
+      "title": "Core Ingestion Platform",
+      "description": "High-throughput distributed ingestion platform handling 1B+ daily item, price, and inventory update events across Store, Online, and Marketplace ecosystem. Contributed to $1B+ in annual revenue. Featured in press and media.",
+      "emoji": "🏗️",
+      "tags": ["Java", "Kafka", "Distributed Systems", "Kubernetes"],
+      "github": "",
+      "demo": "",
+      "featured": true
+    },
+    {
+      "title": "Configurable Spec Parser",
+      "description": "Metadata-driven onboarding framework that reduced setup time from 2 weeks to 5 minutes, saving ~80 person-days. Now used across 7+ major initiatives. Eliminates manual configuration with zero-code onboarding.",
+      "emoji": "🔧",
+      "tags": ["Java", "Metadata-Driven", "Platform Engineering"],
+      "github": "",
+      "demo": "",
+      "featured": true
+    },
+    {
+      "title": "Centralized Schema Registry",
+      "description": "Architected and built from the ground up as a Staff Engineer. Enables automated data mapping and seamless contract onboarding across multiple systems — reduced onboarding time from 3 weeks to 2 hours. Powers 20+ major initiatives.",
+      "emoji": "📋",
+      "tags": ["Java", "Schema Management", "Platform Engineering"],
+      "github": "",
+      "demo": "",
+      "featured": false
+    },
+    {
+      "title": "Scalable Schema Validation System",
+      "description": "On-demand schema loading system reducing memory usage by 90% and validation time from 20 minutes to 8 seconds. Supports 6,000+ product-type schemas and identifies ~100K data errors daily across ingestion flows.",
+      "emoji": "🛡️",
+      "tags": ["Java", "Distributed Systems", "Data Quality"],
+      "github": "",
+      "demo": "",
+      "featured": false
+    }
+  ]
+}
