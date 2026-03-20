@@ -2,10 +2,12 @@ backend:
   name: git-gateway
   branch: main
 
-media_folder: "images/blog"
-public_folder: "/images/blog"
+media_folder: "images"
+public_folder: "/images"
 
 collections:
+
+  # ── Blog Posts (folder collection) ─────────────────────────
   - name: "posts"
     label: "Blog Posts"
     label_singular: "Blog Post"
@@ -25,3 +27,127 @@ collections:
       - { label: "Excerpt",     name: "excerpt",     widget: "text" }
       - { label: "Cover Image", name: "coverImage",  widget: "image",    required: false }
       - { label: "Body",        name: "body",        widget: "markdown" }
+
+  # ── Site Settings (file collections) ───────────────────────
+  - name: "settings"
+    label: "Site Settings"
+    files:
+
+      # ── Profile ────────────────────────────────────────────
+      - name: "profile"
+        label: "Profile & About"
+        file: "data/profile.json"
+        fields:
+          - { label: "Full Name",    name: "name",          widget: "string" }
+          - { label: "Short Name",   name: "shortName",     widget: "string" }
+          - { label: "Tagline",      name: "tagline",       widget: "string" }
+          - { label: "Status",       name: "status",        widget: "string" }
+          - { label: "Footer Tagline", name: "footerTagline", widget: "string" }
+          - { label: "Contact Subtitle", name: "contactSubtitle", widget: "text" }
+          - { label: "Avatar Image", name: "avatar",        widget: "image",  required: false }
+          - { label: "Resume PDF",   name: "resumePdf",     widget: "file",   required: false }
+          - { label: "About Text",   name: "about",         widget: "text" }
+          - label: "Roles"
+            name: "roles"
+            widget: "list"
+            field: { label: "Role", name: "role", widget: "string" }
+          - label: "Highlights"
+            name: "highlights"
+            widget: "list"
+            fields:
+              - { label: "Icon (FA class)", name: "icon", widget: "string" }
+              - { label: "Text",            name: "text", widget: "string" }
+          - label: "Stats"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Value", name: "value", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+          - label: "Socials"
+            name: "socials"
+            widget: "list"
+            fields:
+              - { label: "Platform", name: "platform", widget: "string" }
+              - { label: "URL",      name: "url",      widget: "string" }
+          - label: "Contact Items"
+            name: "contactItems"
+            widget: "list"
+            fields:
+              - { label: "Icon (FA class)", name: "icon",  widget: "string" }
+              - { label: "Label",           name: "label", widget: "string" }
+              - { label: "Value",           name: "value", widget: "string" }
+          - label: "Beyond Work"
+            name: "beyondWork"
+            widget: "object"
+            fields:
+              - { label: "Section Title",    name: "title",    widget: "string" }
+              - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+              - label: "Events"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Emoji",       name: "emoji",       widget: "string" }
+                  - { label: "Role",        name: "role",        widget: "string" }
+                  - { label: "Event Name",  name: "event",       widget: "string" }
+                  - { label: "Location",    name: "location",    widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "URL",         name: "url",         widget: "string", required: false }
+
+      # ── Resume ─────────────────────────────────────────────
+      - name: "resume"
+        label: "Resume"
+        file: "data/resume.json"
+        fields:
+          - label: "Experience"
+            name: "experience"
+            widget: "list"
+            fields:
+              - { label: "Role",        name: "role",        widget: "string" }
+              - { label: "Company",     name: "company",     widget: "string" }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "From",        name: "from",        widget: "string" }
+              - { label: "To",          name: "to",          widget: "string", required: false }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Tags",        name: "tags",        widget: "list" }
+          - label: "Education"
+            name: "education"
+            widget: "list"
+            fields:
+              - { label: "Degree",      name: "degree",      widget: "string" }
+              - { label: "Institution", name: "institution", widget: "string" }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "From",        name: "from",        widget: "string" }
+              - { label: "To",          name: "to",          widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Tags",        name: "tags",        widget: "list" }
+          - label: "Achievements"
+            name: "achievements"
+            widget: "list"
+            fields:
+              - { label: "Emoji",       name: "emoji",       widget: "string" }
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Year",        name: "year",        widget: "string" }
+              - { label: "URL",         name: "url",         widget: "string", required: false }
+          - label: "Skills"
+            name: "skills"
+            widget: "list"
+            fields:
+              - { label: "Category", name: "category", widget: "string" }
+              - label: "Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Name",          name: "name", widget: "string" }
+                  - { label: "Icon (FA class)", name: "icon", widget: "string", required: false }
+          - label: "Projects"
+            name: "projects"
+            widget: "list"
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Emoji",       name: "emoji",       widget: "string" }
+              - { label: "Tags",        name: "tags",        widget: "list" }
+              - { label: "GitHub URL",  name: "github",      widget: "string", required: false }
+              - { label: "Demo URL",    name: "demo",        widget: "string", required: false }
+              - { label: "Featured",    name: "featured",    widget: "boolean", default: false }
